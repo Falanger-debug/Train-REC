@@ -1,6 +1,6 @@
 # Train-REC
 ### Prerequisites 
-1. Node.js
+1. Node.js__
   To check if Node.js is already installed on your system, run:
   ```
   node -v  
@@ -13,29 +13,30 @@
   [https://github.com/nvm-sh/nvm.git](https://github.com/nvm-sh/nvm.git)
 
   Once NVM is installed, you can easily install and use the desired Node.js version. For example:
+  ```
   nvm install 22.12.0
   nvm use 22.12.0
-  
+  ```
   If you prefer not to use NVM, you can install Node.js manually from [https://nodejs.org](https://nodejs.org).
 ### Installation
-1. Clone the repository:
+1. Clone the repository:__
    Run the following commands to clone the repository and navigate to the project directory:
    ```
    git clone https://github.com/Falanger-debug/Train-REC.git
    cd Train-REC
    ```
-3. Create .env file in Train-REC folder:
+3. Create .env file in Train-REC folder:__
    Inside the Train-REC folder, create an empty .env file. You don’t need to add anything to it, this is just to prevent errors during runtime.
-4. Install dependencies:
+4. Install dependencies:__
    Install all the required packages by running:
    ```
    npm install
    ```
-6. Run the application:
+6. Run the application:__
    Start the application using the following command:
    ```
    npm run dev
    ```
-   Once the application is running, open your browser and visit:
+   Once the application is running, open your browser and visit:__
    [http://localhost:8080](http://localhost:8080)
    
