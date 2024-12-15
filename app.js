@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import {renderMainPage} from './controllers/mainController.js'
+import mainRoutes from './routes/mainRoutes.js';
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // routes
-app.get('/', renderMainPage);
+app.use('/', mainRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

@@ -1,0 +1,29 @@
+.btn-buy {
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100px;
+    height: 60px;
+}
+
+.btn-buy:hover {
+    background-color: #cc0000;
+}
+
+.icon-pointer {
+    margin-left: 5px;
+    color: white;
+}
+
+.table-container {
+    margin-top: 30px;
+    background-color: #15216d;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.table td {
+    vertical-align: middle;
+}
