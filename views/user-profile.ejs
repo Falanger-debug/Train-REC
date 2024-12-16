@@ -16,7 +16,27 @@
 </head>
 <body>
 <%- include('partials/header') %>
-
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="form-container col-12">
+        <div class="form-container bg-white text-dark">
+            <h3> Moje bilety: </h3>
+            <ul class="list-group">
+                <li class="rounded my-3 list-group-item d-flex justify-content-between align-items-center" style="background-color: #9283f2;">
+                    <p class="mb-0 h5">Pobierz bilet</p>
+                    <button class="btn btn-search" style="font-size: 20px;">Zwróć bilet</button>
+                </li>
+                <li class="rounded my-3 list-group-item d-flex justify-content-between align-items-center" style="background-color: #9283f2;">
+                    <p class="mb-0 h5">Pobierz bilet</p>
+                    <button class="btn btn-search disabled" style="font-size: 20px;">Termin odjazdu minął</button>
+                </li>
+                <li class="rounded my-3 list-group-item d-flex justify-content-between align-items-center" style="background-color: #9283f2;">
+                    <p class="mb-0 h5">Pobierz bilet</p>
+                    <button class="btn btn-search disabled" style="font-size: 20px;">Termin odjazdu minął</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 <%- include('partials/footer') %>
 
