@@ -22,63 +22,65 @@
     <!----------------------------------------------------------------------------------------->
 
     <div class="d-flex justify-content-center align-items-center mt-5">
-        <div class="form-container col-4 mt-6">
-            <div class="form-container bg-white text-dark">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="mb-0">dvsahdasghdfsa?</h3>
-                    <p class="mb-0">You can always change your mind in your account settings.</p>
-                </div>
-                <div class="modal-footer flex-nowrap p-0">
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
-                    
-                </div>
+        <div class="form-container col-4 mt-6 bg-white text-dark position-relative" style="border: 15px solid #1a237e; border-radius: 5px;">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Close" onclick="closeWindow()"></button>
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-3 fw-bolder" style="color: #FF0000;">ZAKUP ZATWIERDZONY</h5>
+                <p class="mb-0">Bilet jest dostępny na koncie oraz zostanie wysłany na podany adres e-mail.</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="form-container col-4 mt-6 bg-danger text-white position-relative">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Close" onclick="closeWindow()"></button>
+            
+            <div class="modal-body p-4 text-center">
+                <p class="mb-0 fw-bold text-white" style="font-size: 1.5rem;">Brak wystarczających środków na koncie!</p>
             </div>
         </div>
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-5">
-        <div class="form-container col-4 mt-6">
-            <div class="form-container bg-white text-dark">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="mb-0">Enable this setting?</h3>
-                    <p class="mb-0">You can always change your mind in your account settings.</p>
+        <div class="form-container col-4 mt-6" style="background-color: #9370DB;">
+            <div class="modal-body p-4 text-center">
+                <p class="mb-0 fw-bold text-white" style="font-size: 1.5rem;">Czy napewno chcesz zwrócić bilet?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center p-0">
+                <div class="d-flex gap-2" style="width: 100%; justify-content: center;">
+                    <button type="button" class="btn btn-lg text-white fs-5 text-decoration-none col-6 py-2 m-0 rounded-0" 
+                            style="border: 4px solid #FF7F7F; background-color: #FF0000;">
+                        <strong>Tak</strong>
+                    </button>
+                    <button type="button" class="btn btn-lg text-white fs-5 text-decoration-none col-6 py-2 m-0 rounded-0" 
+                            style="border: 4px solid #FF7F7F; background-color: #FF0000;">
+                        <strong>Nie</strong>
+                    </button>
                 </div>
-
             </div>
         </div>
     </div>
-
+    
     <div class="d-flex justify-content-center align-items-center mt-5">
-        <div class="form-container col-4 mt-6">
-            <div class="form-container bg-white text-dark">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="mb-0">Enable this setting?</h3>
-                    <p class="mb-0">You can always change your mind in your account settings.</p>
-                </div>
-                <div class="modal-footer flex-nowrap p-0">
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
+        <div class="form-container col-4 mt-6" style="background-color: #9370DB;">
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-3 fw-bolder" style="color: #1A237E; font-size: 1.5rem;">ZWRÓCONO BILET</h5>
+                <p class="mb-0 fw-bold text-white" style="font-size: 1rem;">Środki zostały zwrócone na konto.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center p-0">
+                <div class="d-flex gap-2" style="width: 100%; justify-content: center;">
+                    <button type="button" class="btn btn-lg text-white fs-5 text-decoration-none col-6 py-2 m-0 rounded-0" 
+                            style="border: 4px solid #FF7F7F; background-color: #FF0000;">
+                        <strong>Powrót</strong>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="d-flex justify-content-center align-items-center mt-5">
-        <div class="form-container col-4 mt-6">
-            <div class="form-container bg-white text-dark">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="mb-0">Enable this setting?</h3>
-                    <p class="mb-0">You can always change your mind in your account settings.</p>
-                </div>
-                <div class="modal-footer flex-nowrap p-0">
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
-                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
+    
+    
 
 
     <!----------------------------------------------------------------------------------------->
