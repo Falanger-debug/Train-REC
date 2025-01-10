@@ -14,8 +14,23 @@ const renderUserProfile = (req, res) => {
     res.render('user-profile');
 }
 
+const renderLogin = (req, res) => {
+    res.render('login');
+}
+
+const renderRegister = (req, res) => {
+    res.render('register');
+}
+
+const renderModals = (req, res) => {
+    res.render('modals');
+}
+
 
 export { renderMainPage, 
          renderTrainRoutes, 
          renderWallet,
-         renderUserProfile};
+         renderUserProfile,
+         renderLogin,
+         renderRegister,
+         renderModals};
