@@ -99,6 +99,66 @@
 </div>
 
 
+<div class="modal fade" id="chooseSeatModal" tabindex="-1" aria-labelledby="chooseSeatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chooseSeatModalLabel">Wybierz miejsce</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="seatSelectionForm">
+                    <div class="mb-3">
+                        <label for="wagonNumber" class="form-label">Numer wagonu</label>
+                        <input type="number" class="form-control" id="wagonNumber" min="1" max="20" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="seatNumber" class="form-label">Numer miejsca</label>
+                        <input type="number" class="form-control" id="seatNumber" min="1" max="100" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <!-- Usunięcie form submit w przycisku. Tylko dla modala -->
+                <button id="btnConfirm" type="button" class="btn btn-primary">Zatwierdź</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sukcesu -->
+<div class="modal fade" id="seat-success" tabindex="-1" aria-labelledby="seatSuccessModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="seatSuccessModalLabel">Sukces!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Miejsce zarezerwowane pomyślnie!
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal Błędu -->
+<div class="modal fade" id="seat-failure" tabindex="-1" aria-labelledby="seatFailureModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="seatFailureModalLabel">Błąd!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Wybrane miejsce nie jest dostępne!
+        </div>
+    </div>
+</div>
+</div>
+
+
+
 
 
 
