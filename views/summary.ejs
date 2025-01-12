@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podsumowanie</title>
+    <!-- Możesz dodać style i skrypty Bootstrap oraz własne -->
+</head>
+<body>
+    <div class="container">
+        <h1>Podsumowanie Zakupu</h1>
+        <div id="summaryContent"></div>
+    </div>
+
+    <script>
+        // Funkcja do pobierania parametrów z URL
+        function getUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                class: urlParams.get('class'),
+                discount: urlParams.get('discount'),
+                seat: urlParams.get('seat'),
+                price: urlParams.get('price')
+            };
+        }
+
+        // Wyświetlenie podsumowania na stronie
+        function displaySummary() {
+            const { class: selectedClass, discount, seat, price } = getUrlParams();
+            const seatText = seat === "wybrane" ? "Wpisz numer ręcznie" : seat;
+
+            const summaryMessage = `
+                <h4>Podsumowanie Zakupu</h4>
+                <p><strong>Klasa:</strong> ${selectedClass === "1" ? "Klasa 1" : selectedClass === "2" ? "Klasa 2" : "Nie wybrano"}</p>
+                <p><strong>Ulga:</strong> ${discount === "student" ? "Ulga studencka (51%)" :
+                                            discount === "school" ? "Ulga szkolna (37%)" :
+                                            discount === "senior" ? "Ulga dla seniorów (30%)" :
+                                            discount === "disabled" ? "Ulga dla osób niepełnosprawnych (78%)" : "Brak ulgi"}</p>
+                <p><strong>Preferencje miejsca:</strong> ${seatText}</p>
+                <p><strong>Cena:</strong> ${price} zł</p>
+            `;
+
+            document.getElementById("summaryContent").innerHTML = summaryMessage;
+        }
+
+        // Wywołanie funkcji po załadowaniu strony
+        window.addEventListener('load', displaySummary);
+    </script>
+</body>
+</html>

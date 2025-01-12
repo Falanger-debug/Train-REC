@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan your Journey</title>
+
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Custom Styling-->
+    <link rel="stylesheet" href="/mainStyles.css">
+    <link rel="stylesheet" href="/headerStyles.css">
+    <link rel="stylesheet" href="/buyTicketStyles.css">
+
+    <!--FontAwesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+<%- include('partials/header') %>
+
+
+<div class="submit-container">
+    <div class="container table-container">
+        <h1>Wybrane połączenie:</h1>
+        <table class="table table-borderless text-center">
+            <thead>
+                <tr>
+                    <th>Skąd</th>
+                    <th>Dokąd</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                    <th>Czas Podróży</th>
+                    <th>Liczba Przesiadek</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="wherefrom"><%= ticket.wherefrom %></td>
+                    <td id="whereto"><%= ticket.whereto %></td>
+                    <td id="from"><%= ticket.from %></td>
+                    <td id="to"><%= ticket.to %></td>
+                    <td id="duration"><%= ticket.duration %></td>
+                    <td id="connections"><%= ticket.connections %></td>
+                    <td id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="choice-container">
+        <div class="container my-4">
+            <label for="discount" class="form-label">Wybierz ulgę</label>
+            <select id="discount" class="form-select form-select-lg">
+                <option value="brak" selected>Brak ulgi</option>
+                <option value="student">Ulga studencka (51%)</option>
+                <option value="school">Ulga szkolna (37%)</option>
+                <option value="senior">Ulga dla seniorów (30%)</option>
+                <option value="disabled">Ulga dla osób niepełnosprawnych (78%)</option>
+            </select>
+        </div>
+
+        <div class="container my-4">
+            <label for="seat" class="form-label">Wybierz miejsce</label>
+            <select id="seat" class="form-select form-select-lg">
+                <option value="dowolny" selected>Dowolne miejsce</option>
+                <option value="bezprzedzialowy">Wagon bezprzedziałowy</option>
+                <option value="przedzialy">Wagon z przedziałami</option>
+                <option value="wozek">Miejsce dla osoby na wózku</option>
+                <option value="rower">Miejsce dla podróżującego z rowerem</option>
+                <option value="wybrane">Wpisz numer ręcznie</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="classchoice">
+        <a href="#" class="btn btn-primary btn-lg" id="class1Btn">KLASA 1</a>
+        <a href="#" class="btn btn-secondary btn-lg" id="class2Btn">KLASA 2</a>
+    </div>
+
+    <div class="toggle-container my-4">
+        <label class="toggle-switch">
+            <input type="checkbox" id="showDetailsToggle">
+            <span class="slider"></span>
+        </label>
+        <span class="ms-3">Pokaż szczegóły połączenia</span>
+    </div>
+
+    <div class="details-container mt-3" id="detailsSection" style="display: none;">
+        <img src="/images/szczegolyPolaczenia.png" alt="szczegóły połączenia" class="me-2" style="width: 300px; height: auto">
+    </div>
+
+    <div class="container my-4">
+        <button class="btn btn-success btn-lg" id="summaryBtn"><b>Podsumowanie</b></button>
+    </div>
+</div>
+
+
+
+
+
+
+
+<%- include('partials/footer') %>
+<!--Bootstrap JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/scripts/toggleDetails.js"></script>
+<script src="/scripts/chosenSeat.js"></script>
+<script src="/scripts/priceClass.js"></script>
+<script src="/scripts/getSummary.js"></script>
+
+
+</body>
+</html>
