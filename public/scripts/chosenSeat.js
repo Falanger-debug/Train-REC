@@ -10,6 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pokaż modal po wybraniu opcji "wybrane" z selecta
     const seatSelect = document.getElementById('seat');
     const discountSelect = document.getElementById('discount');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const basePriceElement = document.getElementById('price');
+    const totalPriceElement = document.getElementById('totalPrice');
+
+    const basePrice = parseFloat(basePriceElement.getAttribute('data-price'));
+
+    const discounts = {
+        student: 0.51,
+        school: 0.37,
+        senior: 0.3,
+        disabled: 0.78,
+        none: 0
+    }
 
     seatSelect.addEventListener('change', () => {
         if (seatSelect.value === 'wybrane') {
@@ -17,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // seatChoice.value = "wybrane recznie";
         }
     });
+
+    discountSelect.addEventListener('change', updatePrice);
+
+    updatePrice();
 
     // Obsługa zatwierdzania formularza po kliknięciu w przycisk "Zatwierdź"
     btnConfirm.addEventListener('click', (e) => {
@@ -54,8 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBackdrop(); // Usuwa backdrop po zamknięciu modala błędu
     });
 
+    function updatePrice() {
+        const selectedDiscount = discountSelect.value;
+        const discountValue = discounts[selectedDiscount] || 0;
+        const finalPrice = basePrice * (1 - discountValue);
+        totalPriceElement.textContent = finalPrice.toFixed(2);
+    }
+
 
     window.selectedSeat = () => selectedSeat;
-
 
 });
