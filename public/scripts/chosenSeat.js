@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     seatSelect.addEventListener('change', () => {
         if (seatSelect.value === 'wybrane') {
             chooseSeatModal.show();
-            seatChoice.value = "wybrane recznie";
+            // seatChoice.value = "wybrane recznie";
         }
     });
 

@@ -11,7 +11,7 @@ const renderWallet = (req, res) => {
 }
 
 const renderUserProfile = (req, res) => {
-    res.render('user-profile');
+    res.render('userProfile');
 }
 
 const renderLogin = (req, res) => {
@@ -47,7 +47,7 @@ const renderBuyTicket = (req, res) => {
         wherefrom,
         whereto
     }
-    res.render('buy-ticket', {ticket});
+    res.render('buyTicket', {ticket});
 }
 
 const renderSummary = (req, res) => {
