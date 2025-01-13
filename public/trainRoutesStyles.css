@@ -36,3 +36,31 @@
         display: none;
     }
 }
+
+.modal-dialog{
+    max-width: 90%;
+}
+
+.modal-content {
+    overflow-y: auto;
+    padding: 1rem;
+    max-height: 80vh;
+}
+
+.modal-body table{
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+@media (max-width: 768px) {
+    .truncate-text {
+        max-width: 70px;
+    }
+}
