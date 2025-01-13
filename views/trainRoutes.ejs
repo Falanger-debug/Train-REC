@@ -24,8 +24,8 @@
         <thead>
         <tr>
             <th></th>
-            <th>Tarnów</th>
-            <th>Kraków</th>
+            <th><%= connection.from %></th>
+            <th><%= connection.to %></th>
             <th>Czas Podróży</th>
             <th>Liczba Przesiadek</th>
             <th>Cena</th>
@@ -35,44 +35,44 @@
         <!-- Wiersz 1 -->
         <tr>
             <td>
-                <button class="btn btn-buy">
+                <a href="/buyTicket?from=08:00&to=09:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-buy">
                     KUP BILET
                     <i class="fas fa-hand-pointer icon-pointer"></i>
-                </button>
+                </a>
             </td>
             <td>08:00</td>
             <td>09:30</td>
             <td>1h 30m</td>
             <td>0</td>
-            <td>35 zł</td>
+            <td>35.00 zł</td>
         </tr>
         <!-- Wiersz 2 -->
         <tr>
             <td>
-                <button class="btn btn-buy">
+                <a href="/buyTicket?from=10:00&to=11:45&duration=1h%2045m&connections=1&price=40&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-buy">
                     KUP BILET
                     <i class="fas fa-hand-pointer icon-pointer"></i>
-                </button>
+                </a>
             </td>
             <td>10:00</td>
             <td>11:45</td>
             <td>1h 45m</td>
             <td>1</td>
-            <td>40 zł</td>
+            <td>40.00 zł</td>
         </tr>
         <!-- Wiersz 3 -->
         <tr>
             <td>
-                <button class="btn btn-buy">
+                <a href="/buyTicket?from=12:00&to=13.30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-buy">
                     KUP BILET
                     <i class="fas fa-hand-pointer icon-pointer"></i>
-                </button>
+                </a>
             </td>
             <td>12:00</td>
             <td>13:30</td>
             <td>1h 30m</td>
             <td>0</td>
-            <td>35 zł</td>
+            <td>35.00 zł</td>
         </tr>
         </tbody>
     </table>

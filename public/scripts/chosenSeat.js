@@ -5,18 +5,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnConfirm = document.getElementById('btnConfirm');
     const seatSelectionForm = document.getElementById('seatSelectionForm');
-
+    let selectedSeatDisplay = document.getElementById('selectedSeatDisplay');
 
     // Pokaż modal po wybraniu opcji "wybrane" z selecta
     const seatSelect = document.getElementById('seat');
     const discountSelect = document.getElementById('discount');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const basePriceElement = document.getElementById('price');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const class1Btn = document.getElementById('class1Btn');
+    const basePrice = parseFloat(basePriceElement.getAttribute('data-price'));
+
+    const discounts = {
+        student: 0.51,
+        school: 0.37,
+        senior: 0.3,
+        disabled: 0.78,
+        none: 0
+    }
+
+    discountSelect.addEventListener('change', () => {
+        if(discountSelect.value !== 'brak') {
+            class1Btn.disabled = true;
+            class1Btn.classList.add('disabled');
+        } else {
+            class1Btn.disabled = false;
+            class1Btn.classList.remove('disabled');
+        }
+    });
 
     seatSelect.addEventListener('change', () => {
         if (seatSelect.value === 'wybrane') {
             chooseSeatModal.show();
-            seatChoice.value = "wybrane recznie";
+        } else {
+            selectedSeatDisplay.textContent = '';
         }
     });
+
+    discountSelect.addEventListener('change', updatePrice);
+
+    updatePrice();
 
     // Obsługa zatwierdzania formularza po kliknięciu w przycisk "Zatwierdź"
     btnConfirm.addEventListener('click', (e) => {
@@ -32,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Jeśli dane są poprawne, pokaż sukces
             successModal.show();
+            selectedSeatDisplay.textContent = `Wagon ${wagonNumber}, Miejsce ${seatNumber}`;
         }
 
         // Zamknięcie modala po zatwierdzeniu
@@ -42,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function removeBackdrop() {
         const backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) {
-            backdrop.remove(); // Usuwa tło (backdrop)
+            backdrop.remove();
         }
     }
     successModal._element.addEventListener('hidden.bs.modal', () => {
@@ -54,8 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBackdrop(); // Usuwa backdrop po zamknięciu modala błędu
     });
 
-
+    function updatePrice() {
+        const selectedDiscount = discountSelect.value;
+        const discountValue = discounts[selectedDiscount] || 0;
+        const finalPrice = basePrice * (1 - discountValue);
+        totalPriceElement.textContent = finalPrice.toFixed(2);
+    }
     window.selectedSeat = () => selectedSeat;
-
 
 });

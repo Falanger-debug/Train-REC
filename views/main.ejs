@@ -21,35 +21,35 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="form-container">
         <h2>ZAPLANUJ PODRÓŻ:</h2>
-        <form>
+        <form action="/searchConnections" method="POST">
             <div class="mb-3 icon-input">
 
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" class="form-control" placeholder="Stacja początkowa">
+                <input type="text" name="from" class="form-control" placeholder="Stacja początkowa">
 
 
             </div>
             <div class="mb-3 icon-input">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" class="form-control" placeholder="Stacja końcowa">
+                <input type="text" name="to" class="form-control" placeholder="Stacja końcowa">
             </div>
             <div class="row g-3">
                 <div class="col-6 icon-input">
 
                     <i class="fas fa-calendar-alt"></i>
-                    <input type="date" class="form-control">
+                    <input type="date" name="date" class="form-control">
 
                 </div>
                 <div class="col-6 icon-input">
 
                     <i class="fas fa-clock"></i>
-                    <input type="time" class="form-control">
+                    <input type="time" name="hour" class="form-control">
 
 
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a class="btn btn-search w-100" href="/trainRoutes" role="button">Wyszukaj</a>
+                <button class="btn btn-search w-100" type="submit">Wyszukaj</button>
             </div>
         </form>
     </div>

@@ -1,31 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Funkcja do generowania URL z danymi
+    // Function to generate URL with data
     function generateSummaryUrl() {
-        const priceElement = document.getElementById('price');
+        const priceElement = document.getElementById('totalPrice');
         const discountElement = document.getElementById('discount');
         const seatElement = document.getElementById('seat');
-        const classElement = document.getElementById('classchoice');
+        const wherefromElement = document.getElementById('wherefrom');
+        const wheretoElement = document.getElementById('whereto');
+        const fromElement = document.getElementById('from');
+        const toElement = document.getElementById('to');
 
-        const basePrice = parseFloat(priceElement.getAttribute('data-price'));
+        const finalPrice = parseFloat(priceElement?.textContent) || 0;
 
-        let selectedClass = '2';
-        let selectedDiscount = discountElement.value;
-        let selectedSeat = seatElement.value;
+        const class1Btn = document.getElementById('class1Btn');
+        const class2Btn = document.getElementById('class2Btn');
 
-        // Jeżeli wybrano klasę, nadpisz domyślną wartość
-        if (classElement.value === '1') {
-            selectedClass = classElement.value;
+        let selectedClass = '';
+        if (class1Btn && class1Btn.classList.contains('active')) {
+            selectedClass = '1';
+        } else if (class2Btn && class2Btn.classList.contains('active')) {
+            selectedClass = '2';
         }
 
-        // Tworzymy URL z danymi
-        const summaryUrl = `/summary?class=${selectedClass}&discount=${selectedDiscount}&seat=${selectedSeat}&price=${basePrice.toFixed(2)}`;
+        let selectedDiscount = discountElement?.value || '';
+        let selectedSeat = seatElement?.value || '';
+
+        let wherefrom = wherefromElement?.textContent || '' || wherefromElement?.value || '';
+        let whereto = wheretoElement?.textContent || '' || wheretoElement?.value || '';
+
+        let from = fromElement?.textContent || '';
+        let to = toElement?.textContent || '';
+
+        // Generate URL with the data
+        const summaryUrl = `/summary?class=${encodeURIComponent(selectedClass)}&discount=${encodeURIComponent(selectedDiscount)}&seat=${encodeURIComponent(selectedSeat)}&price=${encodeURIComponent(finalPrice.toFixed(2))}&wherefrom=${encodeURIComponent(wherefrom)}&whereto=${encodeURIComponent(whereto)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
         return summaryUrl;
     }
 
-    // Obsługa kliknięcia na przycisk Podsumowanie
+    // Handle click event on the Summary button
     const summaryBtn = document.getElementById('summaryBtn');
-    summaryBtn.addEventListener('click', () => {
-        const summaryUrl = generateSummaryUrl();
-        window.location.href = summaryUrl; // Przekierowanie na stronę podsumowania
-    });
+    if (summaryBtn) {
+        summaryBtn.addEventListener('click', () => {
+            const summaryUrl = generateSummaryUrl();
+            window.location.href = summaryUrl; // Redirect to the summary page
+        });
+    }
 });

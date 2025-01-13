@@ -14,17 +14,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    max-width: 900px;
-    margin:13px;
-    margin-top: 0px;
+    margin: 13px auto;
 
 }
 .choice-container .form-select {
     font-size: 1.2vw;
 
 }
-
 
 #classchoice .btn {
     width: 100%;
@@ -90,7 +86,7 @@
     height: 20px;
     width: 20px;
     left: 5px;
-    bottom: 2.5px;
+    bottom: 3px;
     background-color: white;
     border-radius: 50%;
     transition: 0.4s;
@@ -107,13 +103,10 @@ input:checked + .slider:before {
 
 #summaryBtn {
     display: block;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px auto 0 auto;
     background-color: var(--orange-color);
     border-color: var(--orange-color);
-    padding: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 15px 25px 0 25px;
     font-size:x-large;
 }
 .submit-container {
@@ -121,21 +114,44 @@ input:checked + .slider:before {
     border-radius: 15px;
     padding: 30px;
     color: white;
-    margin: auto;
+    margin: 30px auto auto auto;
     max-width: 60%; /* Dopasowanie szerokości */
-    margin-top: 30px; /* Odstęp od nagłówka */
-
 }
 
 .table-container {
     color: white;
     padding: 15px;
     border-radius: 20px;
-    max-width: 100%;
-    overflow-x: auto;
+    display: table;
+    margin: 0 auto;
+    width: 60%;
+    max-width: 600px;
 }
 
+@media (max-width: 768px) {
+    .table-container{
+        width: 100%;
+        padding: 5px;
+    }
+}
 
+@media (max-width: 480px) {
+    .table-container {
+        width: 95%;
+        padding: 5px
+    }
+}
+
+#to #from{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.truncate-text {
+    white-space: nowrap;        /* Nie pozwala na zawijanie tekstu */
+    overflow: hidden;           /* Ukrywa tekst, który wykracza poza dostępny obszar */
+    text-overflow: ellipsis;    /* Zastępuje obcięty tekst trzema kropkami */
+}
 
 #classchoice {
     display: flex;
@@ -165,7 +181,6 @@ input:checked + .slider:before {
     background-color: var(--orange-color);
     border-color: var(--orange-color);
     font-size: x-large;
-    margin-top: 30px;
 }
 
 @media (max-width: 768px) {
@@ -176,4 +191,12 @@ input:checked + .slider:before {
         font-size: 2.5vw;
     }
 
+}
+
+#discountChooser, #class2Btn{
+    margin-right: 5px;
+}
+
+#seatChooser, #class1Btn{
+    margin-left: 5px;
 }

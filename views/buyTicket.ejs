@@ -9,9 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--Custom Styling-->
+    <link rel="stylesheet" href="/buyTicketStyles.css">
     <link rel="stylesheet" href="/mainStyles.css">
     <link rel="stylesheet" href="/headerStyles.css">
-    <link rel="stylesheet" href="/buyTicketStyles.css">
 
     <!--FontAwesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -23,36 +23,43 @@
 
 
 <div class="submit-container">
+
     <div class="container table-container">
-        <h1>Wybrane połączenie:</h1>
-        <table class="table table-borderless text-center">
-            <thead>
-            <tr>
-                <th>Skąd</th>
-                <th>Dokąd</th>
-                <th>Od</th>
-                <th>Do</th>
-                <th>Czas Podróży</th>
-                <th>Liczba Przesiadek</th>
-                <th>Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id="wherefrom"><%= ticket.wherefrom %></td>
-                <td id="whereto"><%= ticket.whereto %></td>
-                <td id="from"><%= ticket.from %></td>
-                <td id="to"><%= ticket.to %></td>
-                <td id="duration"><%= ticket.duration %></td>
-                <td id="connections"><%= ticket.connections %></td>
-                <td id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</td>
-            </tr>
-            </tbody>
-        </table>
+        <h1 class="text-center">Wybrane połączenie:</h1>
+        <div class="row border-bottom border-top pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Skąd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center truncate-text" id="wherefrom"><%= ticket.wherefrom %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Dokąd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center truncate-text" id="whereto"><%= ticket.whereto %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Odjazd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="from"><%= ticket.from %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Przyjazd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="to"><%= ticket.to %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Czas Podróży</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="duration"><%= ticket.duration %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Liczba Przesiadek</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="connections"><%= ticket.connections %></div>
+        </div>
+        <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Cena</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</div>
+        </div>
     </div>
 
-    <div class="choice-container">
-        <div class="container my-4">
+
+
+    <div class="choice-container text-center">
+        <div class="container my-4" id="discountChooser">
             <label for="discount" class="form-label">Wybierz ulgę</label>
             <select id="discount" class="form-select form-select-lg">
                 <option value="brak" selected>Brak ulgi</option>
@@ -63,7 +70,7 @@
             </select>
         </div>
 
-        <div class="container my-4">
+        <div class="container my-4" id="seatChooser">
             <label for="seat" class="form-label">Wybierz miejsce</label>
             <select id="seat" class="form-select form-select-lg">
                 <option value="dowolny" selected>Dowolne miejsce</option>
@@ -76,9 +83,20 @@
         </div>
     </div>
 
+
+    <div class="container my-4 text-center">
+        <h4 id="selectedSeatDisplay"></h4>
+    </div>
+
     <div id="classchoice">
-        <a href="#" class="btn btn-primary btn-lg" id="class1Btn">KLASA 1</a>
-        <a href="#" class="btn btn-secondary btn-lg" id="class2Btn">KLASA 2</a>
+        <button type="button" class="btn btn-primary btn-lg" id="class2Btn">
+            Klasa 2
+        </button>
+        <button type="button" class="btn btn-primary btn-lg" id="class1Btn">
+            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
+            Klasa 1
+            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
+        </button>
     </div>
 
     <div class="toggle-container my-4">
@@ -90,7 +108,11 @@
     </div>
 
     <div class="details-container mt-3" id="detailsSection" style="display: none;">
-        <img src="/images/szczegolyPolaczenia.png" alt="szczegóły połączenia" class="me-2" style="width: 300px; height: auto">
+        <img src="/images/szczegolyPolaczenia.png" alt="szczegóły połączenia" class="me-2" style="width: 300px; height: auto; border-radius: 45px;">
+    </div>
+
+    <div class="container my-4 text-center" id="finalPrice">
+        <h4>Kwota do zapłaty: <span id="totalPrice"></span> zł</h4>
     </div>
 
     <div class="container my-4">
@@ -156,12 +178,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 
 <%- include('partials/footer') %>
