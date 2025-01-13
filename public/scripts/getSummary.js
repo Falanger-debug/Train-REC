@@ -1,24 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Funkcja do generowania URL z danymi
     function generateSummaryUrl() {
-        const priceElement = document.getElementById('price');
+        const priceElement = document.getElementById('finalPrice');
         const discountElement = document.getElementById('discount');
         const seatElement = document.getElementById('seat');
         const classElement = document.getElementById('classchoice');
+        const fromElement = document.getElementById('from');
+        const toElement = document.getElementById('to');
 
-        const basePrice = parseFloat(priceElement.getAttribute('data-price'));
+        const finalPrice = parseFloat(priceElement.textContent) || 0;
 
-        let selectedClass = '2';
         let selectedDiscount = discountElement.value;
         let selectedSeat = seatElement.value;
-
-        // Jeżeli wybrano klasę, nadpisz domyślną wartość
-        if (classElement.value === '1') {
-            selectedClass = classElement.value;
-        }
-
+        let selectedClass = classElement.value;
         // Tworzymy URL z danymi
-        const summaryUrl = `/summary?class=${selectedClass}&discount=${selectedDiscount}&seat=${selectedSeat}&price=${basePrice.toFixed(2)}`;
+        const summaryUrl = `/summary?class=${encodeURIComponent(selectedClass)}&discount=${encodeURIComponent(selectedDiscount)}&seat=${encodeURIComponent(selectedSeat)}&price=${encodeURIComponent(finalPrice.toFixed(2))}&from=${encodeURIComponent(fromElement.value)}&to=${encodeURIComponent(toElement.value)}`;
         return summaryUrl;
     }
 
