@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnConfirm = document.getElementById('btnConfirm');
     const seatSelectionForm = document.getElementById('seatSelectionForm');
-
+    let selectedSeatDisplay = document.getElementById('selectedSeatDisplay');
 
     // Pokaż modal po wybraniu opcji "wybrane" z selecta
     const seatSelect = document.getElementById('seat');
@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     seatSelect.addEventListener('change', () => {
         if (seatSelect.value === 'wybrane') {
             chooseSeatModal.show();
-            // seatChoice.value = "wybrane recznie";
+        } else {
+            selectedSeatDisplay.textContent = '';
         }
     });
 
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Jeśli dane są poprawne, pokaż sukces
             successModal.show();
+            selectedSeatDisplay.textContent = `Wagon ${wagonNumber}, Miejsce ${seatNumber}`;
         }
 
         // Zamknięcie modala po zatwierdzeniu
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function removeBackdrop() {
         const backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) {
-            backdrop.remove(); // Usuwa tło (backdrop)
+            backdrop.remove();
         }
     }
     successModal._element.addEventListener('hidden.bs.modal', () => {
@@ -77,8 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalPrice = basePrice * (1 - discountValue);
         totalPriceElement.textContent = finalPrice.toFixed(2);
     }
-
-
     window.selectedSeat = () => selectedSeat;
 
 });
