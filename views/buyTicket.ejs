@@ -23,33 +23,40 @@
 
 
 <div class="submit-container">
+
     <div class="container table-container">
         <h1>Wybrane połączenie:</h1>
-        <table class="table table-borderless text-center">
-            <thead>
-            <tr>
-                <th>Skąd</th>
-                <th>Dokąd</th>
-                <th>Od</th>
-                <th>Do</th>
-                <th>Czas Podróży</th>
-                <th>Liczba Przesiadek</th>
-                <th>Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id="wherefrom"><%= ticket.wherefrom %></td>
-                <td id="whereto"><%= ticket.whereto %></td>
-                <td id="from"><%= ticket.from %></td>
-                <td id="to"><%= ticket.to %></td>
-                <td id="duration"><%= ticket.duration %></td>
-                <td id="connections"><%= ticket.connections %></td>
-                <td id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row border-bottom border-top pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Skąd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="wherefrom"><%= ticket.wherefrom %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Dokąd</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="whereto"><%= ticket.whereto %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Od</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="from"><%= ticket.from %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Do</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="to"><%= ticket.to %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Czas Podróży</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="duration"><%= ticket.duration %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Liczba Przesiadek</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="connections"><%= ticket.connections %></div>
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center">
+            <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Cena</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</div>
+        </div>
     </div>
+
+
 
     <div class="choice-container">
         <div class="container my-4">
