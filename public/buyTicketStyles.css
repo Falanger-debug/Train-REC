@@ -200,3 +200,23 @@ input:checked + .slider:before {
     }
 
 }
+
+.btn-primary:hover {
+    background-color: #007bff; /* Przykład - ciemniejszy niebieski */
+}
+
+.btn-secondary:hover {
+    background-color: #6c757d; /* Przykład - szary */
+}
+
+.btn-success:hover {
+    background-color: #28a745; /* Przykład - ciemniejsza zieleń */
+}
+
+#class1Btn{
+    margin-right: 10px;
+}
+
+#class2Btn {
+    margin-left: 10px;
+}
