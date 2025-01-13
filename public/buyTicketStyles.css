@@ -14,17 +14,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     max-width: 900px;
-    margin:13px;
-    margin-top: 0px;
+    margin: 13px auto;
 
 }
 .choice-container .form-select {
     font-size: 1.2vw;
 
 }
-
 
 #classchoice .btn {
     width: 100%;
@@ -131,10 +128,36 @@ input:checked + .slider:before {
     color: white;
     padding: 15px;
     border-radius: 20px;
-    max-width: 100%;
-    overflow-x: auto;
+    display: table;
+    margin: 0 auto;
+    width: 60%;
+    max-width: 600px;
 }
 
+@media (max-width: 768px) {
+    .table-container{
+        width: 100%;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-container {
+        width: 95%;
+        padding: 5px
+    }
+}
+
+#to #from{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.truncate-text {
+    white-space: nowrap;        /* Nie pozwala na zawijanie tekstu */
+    overflow: hidden;           /* Ukrywa tekst, który wykracza poza dostępny obszar */
+    text-overflow: ellipsis;    /* Zastępuje obcięty tekst trzema kropkami */
+}
 
 
 #classchoice {
