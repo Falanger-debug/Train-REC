@@ -27,3 +27,12 @@
 .table td {
     vertical-align: middle;
 }
+
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none;
+    }
+    .details-row {
+        display: none;
+    }
+}
