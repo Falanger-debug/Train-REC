@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceDisplay = document.getElementById('priceDisplay');
     const basePriceElement = document.getElementById('price');
     const totalPriceElement = document.getElementById('totalPrice');
-
+    const class1Btn = document.getElementById('class1Btn');
     const basePrice = parseFloat(basePriceElement.getAttribute('data-price'));
 
     const discounts = {
@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
         disabled: 0.78,
         none: 0
     }
+
+    discountSelect.addEventListener('change', () => {
+        if(discountSelect.value !== 'brak') {
+            class1Btn.disabled = true;
+            class1Btn.classList.add('disabled');
+        } else {
+            class1Btn.disabled = false;
+            class1Btn.classList.remove('disabled');
+        }
+    });
 
     seatSelect.addEventListener('change', () => {
         if (seatSelect.value === 'wybrane') {
