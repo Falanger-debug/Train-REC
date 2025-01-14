@@ -201,11 +201,11 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><strong>Nazwa pociągu:</strong> <span id="trainName"></span></li>
-                    <li class="list-group-item"><strong>Numer pociągu:</strong> <span id="trainNumber"></span></li>
-                    <li class="list-group-item"><strong>Stacja Początkowa</strong> <span id="trainFrom"></span></li>
-                    <li class="list-group-item"><strong>Stacja Końcowa:</strong> <span id="trainTo"></span></li>
-                    <li class="list-group-item"><strong>Odgległość od Startu:</strong> <span id="distanceFromTheStart"></span></li>
+                    <li class="list-group-item" id="trainName"></li>
+                    <li class="list-group-item" id="trainNumber"></li>
+                    <li class="list-group-item" id="trainFrom"></li>
+                    <li class="list-group-item" id="trainTo"></li>
+                    <li class="list-group-item" id="distanceFromTheStart"></li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -225,13 +225,13 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><strong>Stacja Początkowa:</strong> <span id="startStation"></span></li>
-                    <li class="list-group-item"><strong>Stacja Końcowa:</strong> <span id="destStation"></span></li>
-                    <li class="list-group-item"><strong>Godzina wyjazdu:</strong> <span id="startTime"></span></li>
-                    <li class="list-group-item"><strong>Godzina przyjazdu:</strong> <span id="destTime"></span></li>
-                    <li class="list-group-item"><strong>Czas trwania:</strong> <span id="duration"></span></li>
-                    <li class="list-group-item"><strong>Liczba przesiadek:</strong> <span id="numOfConnections"></span></li>
-                    <li class="list-group-item"><strong>Cena podstawowa:</strong> <span id="basePrice"></span></li>
+                    <li class="list-group-item" id="startStation"></li>
+                    <li class="list-group-item" id="destStation"></li>
+                    <li class="list-group-item" id="startTime"></li>
+                    <li class="list-group-item" id="destTime"></li>
+                    <li class="list-group-item" id="duration"></li>
+                    <li class="list-group-item" id="numOfConnections"></li>
+                    <li class="list-group-item" id="basePrice"></li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -246,21 +246,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function updateTrainModal(name, number, from, to, distanceFromTheStart) {
-        document.getElementById('trainName').textContent = name || "Brak danych";
-        document.getElementById('trainNumber').textContent = number || "Brak danych";
-        document.getElementById('trainFrom').textContent = from || "Brak danych";
-        document.getElementById('trainTo').textContent = to || "Brak danych";
-        document.getElementById('distanceFromTheStart').textContent = distanceFromTheStart || "Brak danych";
+        document.getElementById('trainName').innerHTML = `<b>Nazwa pociągu:</b> ${name}` || "Brak danych";
+        document.getElementById('trainNumber').innerHTML = `<b>Numer pociągu:</b> ${number}` || "Brak danych";
+        document.getElementById('trainFrom').innerHTML = `<b>Stacja początkowa:</b> ${from}` || "Brak danych";
+        document.getElementById('trainTo').innerHTML = `<b>Stacja końcowa:</b> ${to}` || "Brak danych";
+        document.getElementById('distanceFromTheStart').innerHTML = `<b>Odległość od stacji początkowej:</b> ${distanceFromTheStart}` || "Brak danych";
     }
 
     function updateCourseModal(from, to, startTime, destTime, duration, connections, price) {
-        document.getElementById('startStation').textContent = from || "Brak danych";
-        document.getElementById('destStation').textContent = to || "Brak danych";
-        document.getElementById('startTime').textContent = startTime || "Brak danych";
-        document.getElementById('destTime').textContent = destTime || "Brak danych";
-        document.getElementById('duration').textContent = duration || "Brak danych";
-        document.getElementById('numOfConnections').textContent = connections || "Brak danych";
-        document.getElementById('basePrice').textContent = price || "Brak danych";
+        document.getElementById('startStation').innerHTML =
+            `<b>Stacja początkowa:</b> ${from || "Brak danych"}`;
+        document.getElementById('destStation').innerHTML =
+            `<b>Stacja końcowa:</b> ${to || "Brak danych"}`;
+        document.getElementById('startTime').innerHTML =
+            `<b>Godzina wyjazdu:</b> ${startTime || "Brak danych"}`;
+        document.getElementById('destTime').innerHTML =
+            `<b>Godzina przyjazdu:</b> ${destTime || "Brak danych"}`;
+        document.getElementById('duration').innerHTML =
+            `<b>Czas trwania:</b> ${duration || "Brak danych"}`;
+        document.getElementById('numOfConnections').innerHTML =
+            `<b>Liczba przesiadek:</b> ${connections || "Brak danych"}`;
+        document.getElementById('basePrice').innerHTML =
+            `<b>Cena podstawowa:</b> ${price || "Brak danych"}`;
     }
 
 </script>
