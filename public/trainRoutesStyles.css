@@ -47,6 +47,8 @@ body{
 }
 
 .modal-content {
+    overflow-x: auto;
+    word-wrap: break-word;
     overflow-y: auto;
     padding: 1rem;
     max-height: 80vh;
