@@ -1,3 +1,8 @@
+body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
 .btn-buy {
     background-color: #ff0000;
     color: white;
@@ -28,12 +33,12 @@
     vertical-align: middle;
 }
 
-@media (max-width: 768px) {
+.hide-mobile {
+    display: none;
+}
+@media (min-width: 768px) {
     .hide-mobile {
-        display: none;
-    }
-    .details-row {
-        display: none;
+        display: table-cell;
     }
 }
 
@@ -63,4 +68,16 @@
     .truncate-text {
         max-width: 70px;
     }
+}
+
+.table-responsive {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
