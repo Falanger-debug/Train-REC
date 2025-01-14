@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const class1Btn = document.getElementById('class1Btn');
         const class2Btn = document.getElementById('class2Btn');
 
-        let selectedClass = '';
+        let selectedClass = '2';
         if (class1Btn && class1Btn.classList.contains('active')) {
             selectedClass = '1';
         } else if (class2Btn && class2Btn.classList.contains('active')) {

@@ -1,0 +1,30 @@
+.container {
+    max-width: 100%;
+}
+
+.card {
+    max-width: 90%;
+    margin: auto;
+}
+
+.card-body {
+    overflow-x: auto;
+}
+
+.text-primary, .text-success {
+    word-wrap: break-word;
+}
+
+@media (max-width: 576px) {
+    h5 {
+        font-size: 1rem;
+    }
+}
+
+.row-equal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
