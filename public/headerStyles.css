@@ -3,7 +3,7 @@
 }
 
 @media (max-width: 992px) {
-    span {
+    #headerSpan {
         display: none;
     }
 }

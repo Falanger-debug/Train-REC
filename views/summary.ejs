@@ -8,11 +8,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Custom Styling -->
-    <link rel="stylesheet" href="/mainStyles.css">
-    <link rel="stylesheet" href="/headerStyles.css">
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/summary.ejs">
+    <link rel="stylesheet" href="/mainStyles.css">
+    <link rel="stylesheet" href="/headerStyles.css">
 </head>
 <body>
 <%- include('partials/header') %>
@@ -23,9 +23,9 @@
             <h3><i class="fas fa-check-circle"></i> Podsumowanie Biletu</h3>
         </div>
         <div class="card-body">
-            <div id="summaryContent" class="text-dark">
-                <!-- Summary content will be inserted here by JavaScript -->
-            </div>
+            <ul class="list-group list-group-flush" id="summaryContent">
+                <!-- Dynamicznie generowane dane -->
+            </ul>
         </div>
         <div class="card-footer text-center">
             <button class="btn btn-outline-primary mt-3" onclick="window.history.back()">
@@ -36,8 +36,6 @@
             </a>
         </div>
     </div>
-
-
 </div>
 
 <!-- Bootstrap JS -->
@@ -46,7 +44,6 @@
         crossorigin="anonymous"></script>
 
 <script>
-    // Function to retrieve parameters from the URL
     function getUrlParams() {
         const urlParams = new URLSearchParams(window.location.search);
         return {
@@ -61,44 +58,33 @@
         };
     }
 
-    // Display the summary on the page
     function displaySummary() {
         const { class: selectedClass, discount, seat, price, wherefrom, whereto, from, to } = getUrlParams();
 
         const seatText = seat || "Wpisz numer ręcznie";
 
-        // Summary message with improved readability
-        const summaryMessage = `
-            <div class="mb-3 text-center">
-                <h5>Skąd: <span class="text-primary">${wherefrom || "Nie wybrano"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Dokąd: <span class="text-primary">${whereto || "Nie wybrano"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Czas początkowy: <span class="text-primary">${from || "Nie wybrano"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Czas końcowy: <span class="text-primary">${to || "Nie wybrano"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Klasa: <span class="text-primary">${selectedClass === "1" ? "Klasa 1" : selectedClass === "2" ? "Klasa 2" : "Nie wybrano"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Ulga: <span class="text-primary">${discount === "student" ? "Ulga studencka (51%)" :
-            discount === "school" ? "Ulga szkolna (37%)" :
-                discount === "senior" ? "Ulga dla seniorów (30%)" :
-                    discount === "disabled" ? "Ulga dla osób niepełnosprawnych (78%)" : "Brak ulgi"}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Miejsce: <span class="text-primary">${seatText}</span></h5>
-            </div>
-            <div class="mb-3 text-center">
-                <h5>Cena: <span class="text-success">${price ? price + " zł" : "Nie określono"}</span></h5>
-            </div>
-        `;
+        const summaryData = [
+            { label: "Skąd", value: wherefrom || "Nie wybrano", color: "text-primary" },
+            { label: "Dokąd", value: whereto || "Nie wybrano", color: "text-primary" },
+            { label: "Czas początkowy", value: from || "Nie wybrano", color: "text-primary" },
+            { label: "Czas końcowy", value: to || "Nie wybrano", color: "text-primary" },
+            { label: "Klasa", value: selectedClass === "1" ? "Klasa 1" : selectedClass === "2" ? "Klasa 2" : "Nie wybrano", color: "text-primary" },
+            { label: "Ulga", value: discount === "student" ? "Ulga studencka (51%)" :
+                    discount === "school" ? "Ulga szkolna (37%)" :
+                        discount === "senior" ? "Ulga dla seniorów (30%)" :
+                            discount === "disabled" ? "Ulga dla osób niepełnosprawnych (78%)" : "Brak ulgi", color: "text-primary" },
+            { label: "Miejsce", value: seatText, color: "text-primary" },
+            { label: "Cena", value: price ? price + " zł" : "Nie określono", color: "text-success" }
+        ];
 
-        document.getElementById("summaryContent").innerHTML = summaryMessage;
+        const rowsContent = summaryData.map(data => `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>${data.label}:</strong>
+                <span class="${data.color}">${data.value}</span>
+            </li>
+        `).join('');
+
+        document.getElementById("summaryContent").innerHTML = rowsContent;
     }
 
     window.addEventListener('load', displaySummary);
