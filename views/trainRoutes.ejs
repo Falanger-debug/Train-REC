@@ -37,8 +37,7 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=08:00&to=09:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=08:00&to=09:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
@@ -48,10 +47,8 @@
                                 onclick="updateTrainModal('Przemyślanin', '15123', 'Przemyśl Główny', 'Świnoujście', '250km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none d-lg-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '08:00', '09:30', '1h 30m', '0', '35.00')">
+                        <button class="btn btn-info btn-sm d-md-none"
+                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '08:00', '09:30', '1h 30m', '0', '35.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -66,20 +63,14 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=10:00&to=11:45&duration=1h%2045m&connections=1&price=40&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=10:00&to=11:45&duration=1h%2045m&connections=1&price=40&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#trainDetailsModal"
-                                onclick="updateTrainModal('Osterwa', '84712', 'Szczecin Główny', 'Zakopane', '300km')">
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#trainDetailsModal" onclick="updateTrainModal('Osterwa', '84712', 'Szczecin Główny', 'Zakopane', '300km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '10:00', '11:45', '1h 45m', '1', '40.00 zł')">
+                        <button class="btn btn-info btn-sm d-md-none" onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '10:00', '11:45', '1h 45m', '1', '40.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -94,20 +85,14 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=12:00&to=13:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=12:00&to=13:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#trainDetailsModal"
-                                onclick="updateTrainModal('Pociąg C', '003', 'Warszawa Centralna', 'Gdynia Główna', '200km')">
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#trainDetailsModal" onclick="updateTrainModal('Pociąg C', '003', 'Warszawa Centralna', 'Gdynia Główna', '200km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '12:00', '13:30', '1h 30m', '0', '35.00 zł')">
+                        <button class="btn btn-info btn-sm d-md-none" onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '12:00', '13:30', '1h 30m', '0', '35.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -122,20 +107,14 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=14:00&to=15:45&duration=1h%2045m&connections=2&price=50&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=14:00&to=15:45&duration=1h%2045m&connections=2&price=50&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#trainDetailsModal"
-                                onclick="updateTrainModal('Pociąg D', '004', 'Poznań Główny', 'Kraków Główny', '350km')">
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#trainDetailsModal" onclick="updateTrainModal('Pociąg D', '004', 'Poznań Główny', 'Kraków Główny', '350km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '14:00', '15:45', '1h 45m', '2', '50.00 zł')">
+                        <button class="btn btn-info btn-sm d-md-none" onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '14:00', '15:45', '1h 45m', '2', '50.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -150,20 +129,14 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=16:00&to=17:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=16:00&to=17:30&duration=1h%2030m&connections=0&price=35&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#trainDetailsModal"
-                                onclick="updateTrainModal('Pociąg E', '005', 'Gdańsk Główny', 'Katowice', '400km')">
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#trainDetailsModal" onclick="updateTrainModal('Pociąg E', '005', 'Gdańsk Główny', 'Katowice', '400km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '16:00', '17:30', '1h 30m', '0', '35.00 zł')">
+                        <button class="btn btn-info btn-sm d-md-none" onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '16:00', '17:30', '1h 30m', '0', '35.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -178,20 +151,14 @@
             <tr>
                 <td>
                     <div class="d-flex flex-column">
-                        <a href="/buyTicket?from=18:00&to=19:45&duration=1h%2045m&connections=1&price=45&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>"
-                           class="btn btn-primary btn-sm mb-2">
+                        <a href="/buyTicket?from=18:00&to=19:45&duration=1h%2045m&connections=1&price=45&wherefrom=<%= connection.from %>&whereto=<%= connection.to %>" class="btn btn-primary btn-sm mb-2">
                             Kup Bilet
                             <i class="fas fa-ticket-alt"></i>
                         </a>
-                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#trainDetailsModal"
-                                onclick="updateTrainModal('Pociąg F', '006', 'Łódź Fabryczna', 'Wrocław Główny', '300km')">
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#trainDetailsModal" onclick="updateTrainModal('Pociąg F', '006', 'Łódź Fabryczna', 'Wrocław Główny', '300km')">
                             Szczegóły Pociągu
                         </button>
-                        <button class="btn btn-info btn-sm d-md-none"
-                                data-bs-toggle="modal"
-                                data-bs-target="#courseDetailsModal"
-                                onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '18:00', '19:45', '1h 45m', '1', '45.00 zł')">
+                        <button class="btn btn-info btn-sm d-md-none" onclick="updateCourseModal('<%= connection.from %>', '<%= connection.to %>', '18:00', '19:45', '1h 45m', '1', '45.00 zł')">
                             Szczegóły kursu
                         </button>
                     </div>
@@ -208,8 +175,7 @@
 </div>
 
 <!-- Modal dla szczegółów pociągu -->
-<div class="modal fade" id="trainDetailsModal" tabindex="-1" aria-labelledby="trainDetailsModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="trainDetailsModal" tabindex="-1" aria-labelledby="trainDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -217,14 +183,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
             </div>
             <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Stacja Początkowa:</strong> <span id="trainName"></span></li>
-                    <li class="list-group-item"><strong>Stacja Końcowa:</strong> <span id="trainNumber"></span></li>
-                    <li class="list-group-item"><strong>Godzina wyjazdu:</strong> <span id="trainFrom"></span></li>
-                    <li class="list-group-item"><strong>Godzina przyjazdu:</strong> <span id="trainTo"></span></li>
-                    <li class="list-group-item"><strong>Czas trwania:</strong> <span id="distanceFromTheStart"></span>
-                    </li>
-                </ul>
+                <p class="text-center"><strong>Nazwa Pociągu:</strong> <span id="trainName"></span></p>
+                <p class="text-center"><strong>Numer Pociągu:</strong> <span id="trainNumber"></span></p>
+                <p class="text-center"><strong>Stacja Początkowa:</strong> <span id="trainFrom"></span></p>
+                <p class="text-center"><strong>Stacja Końcowa:</strong> <span id="trainTo"></span></p>
+                <p class="text-center"><strong>Odległość od Startu:</strong> <span id="distanceFromTheStart"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
@@ -234,8 +197,7 @@
 </div>
 
 <!--Modal dla szczegółów kursu-->
-<div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseDetailsModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -243,16 +205,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
             </div>
             <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Stacja Początkowa:</strong> <span id="startStation"></span></li>
-                    <li class="list-group-item"><strong>Stacja Końcowa:</strong> <span id="destStation"></span></li>
-                    <li class="list-group-item"><strong>Godzina wyjazdu:</strong> <span id="startTime"></span></li>
-                    <li class="list-group-item"><strong>Godzina przyjazdu:</strong> <span id="destTime"></span></li>
-                    <li class="list-group-item"><strong>Czas trwania:</strong> <span id="duration"></span></li>
-                    <li class="list-group-item"><strong>Liczba przesiadek:</strong> <span id="numOfConnections"></span>
-                    </li>
-                    <li class="list-group-item"><strong>Cena podstawowa:</strong> <span id="basePrice"></span></li>
-                </ul>
+                <p class="text-center"><strong>Stacja Początkowa:</strong> <span id="startStation"></span></p>
+                <p class="text-center"><strong>Stacja Końcowa:</strong> <span id="destStation"></span></p>
+                <p class="text-center"><strong>Godzina wyjazdu:</strong> <span id="startTime"></span></p>
+                <p class="text-center"><strong>Godzina odjazdu:</strong> <span id="destTime"></span></p>
+                <p class="text-center"><strong>Czas trwania:</strong> <span id="duration"></span></p>
+                <p class="text-center"><strong>Liczba przesiadek:</strong> <span id="numOfConnections"></span></p>
+                <p class="text-center"><strong>Cena podstawowa:</strong> <span id="basePrice"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
