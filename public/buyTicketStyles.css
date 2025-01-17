@@ -203,9 +203,17 @@ input:checked + .slider:before {
 
 #class1Btn, #class2Btn {
     border: solid 2px black;
+
+
 }
+.btn-active {
+    border: 1px solid lightgreen !important;
+}
+
+
 
 #goBackButton {
     background-color: white;
     border-color: white;
 }
+
