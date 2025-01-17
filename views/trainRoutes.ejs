@@ -19,8 +19,12 @@
 <%- include('partials/header') %>
 
 <div class="container my-5">
+    <button class="btn btn-primary hBack " id="goBackButton" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
     <h1 class="text-center mb-4">Zaplanuj Podróż</h1>
-    <div class="table-responsive">
+    <div class="table-responsive" id="routesTable">
         <table class="table table-striped table-hover text-center align-middle">
             <thead class="table-dark">
             <tr>

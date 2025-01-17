@@ -1,7 +1,9 @@
 :root {
     --blue-color: #1b296f;
+    --ligher-blue-color: #0c6efc;
     --orange-color: #f02424;
     --darker-orange-color: #cc0000;
+    --green-color: green;
 }
 
 body {

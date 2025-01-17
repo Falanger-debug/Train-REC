@@ -178,8 +178,8 @@ input:checked + .slider:before {
     display: block;
     margin: 30px auto 0 auto;
     padding: 15px 30px;
-    background-color: var(--orange-color);
-    border-color: var(--orange-color);
+    background-color: var(--green-color);
+    border-color: var(--green-color);
     font-size: x-large;
 }
 
@@ -199,4 +199,13 @@ input:checked + .slider:before {
 
 #seatChooser, #class1Btn{
     margin-left: 5px;
+}
+
+#class1Btn, #class2Btn {
+    border: solid 2px black;
+}
+
+#goBackButton {
+    background-color: white;
+    border-color: white;
 }
