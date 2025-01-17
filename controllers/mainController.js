@@ -69,6 +69,11 @@ const renderSummary = (req, res) => {
     });
 };
 
+const renderSeatChoicePanel = (req, res) => {
+    res.render('seatChoicePanel');
+}
+
+
 export { renderMainPage,
     renderTrainRoutes,
     renderWallet,
@@ -78,4 +83,6 @@ export { renderMainPage,
     renderModals,
     searchConnections,
     renderBuyTicket,
-    renderSummary};
+    renderSummary,
+    renderSeatChoicePanel
+};

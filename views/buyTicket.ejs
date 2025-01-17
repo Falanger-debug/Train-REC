@@ -28,11 +28,13 @@
         <h1 class="text-center">Wybrane połączenie:</h1>
         <div class="row border-bottom border-top pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Skąd</div>
-            <div class="col-6 d-flex justify-content-center align-items-center truncate-text" id="wherefrom"><%= ticket.wherefrom %></div>
+            <div class="col-6 d-flex justify-content-center align-items-center truncate-text"
+                 id="wherefrom"><%= ticket.wherefrom %></div>
         </div>
         <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Dokąd</div>
-            <div class="col-6 d-flex justify-content-center align-items-center truncate-text" id="whereto"><%= ticket.whereto %></div>
+            <div class="col-6 d-flex justify-content-center align-items-center truncate-text"
+                 id="whereto"><%= ticket.whereto %></div>
         </div>
         <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Odjazd</div>
@@ -44,18 +46,21 @@
         </div>
         <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Czas Podróży</div>
-            <div class="col-6 d-flex justify-content-center align-items-center" id="duration"><%= ticket.duration %></div>
+            <div class="col-6 d-flex justify-content-center align-items-center"
+                 id="duration"><%= ticket.duration %></div>
         </div>
         <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Liczba Przesiadek</div>
-            <div class="col-6 d-flex justify-content-center align-items-center" id="connections"><%= ticket.connections %></div>
+            <div class="col-6 d-flex justify-content-center align-items-center"
+                 id="connections"><%= ticket.connections %></div>
         </div>
         <div class="row border-bottom pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Cena</div>
-            <div class="col-6 d-flex justify-content-center align-items-center" id="price" data-price="<%= ticket.price %>"><%= ticket.price %> zł</div>
+            <div class="col-6 d-flex justify-content-center align-items-center" id="price"
+                 data-price="<%= ticket.price %>"><%= ticket.price %> zł
+            </div>
         </div>
     </div>
-
 
 
     <div class="choice-container text-center">
@@ -74,6 +79,7 @@
             <label for="seat" class="form-label">Wybierz miejsce</label>
             <select id="seat" class="form-select form-select-lg">
                 <option value="dowolny" selected>Dowolne miejsce</option>
+                <option value="schemat">Wybierz ze schematu</option>
                 <option value="bezprzedzialowy">Wagon bezprzedziałowy</option>
                 <option value="przedzialy">Wagon z przedziałami</option>
                 <option value="wozek">Miejsce dla osoby na wózku</option>
@@ -108,7 +114,8 @@
     </div>
 
     <div class="details-container mt-3" id="detailsSection" style="display: none;">
-        <img src="/images/szczegolyPolaczenia.png" alt="szczegóły połączenia" class="me-2" style="width: 300px; height: auto; border-radius: 45px;">
+        <img src="/images/szczegolyPolaczenia.png" alt="szczegóły połączenia" class="me-2"
+             style="width: 300px; height: auto; border-radius: 45px;">
     </div>
 
     <div class="container my-4 text-center" id="finalPrice">
@@ -187,6 +194,7 @@
 <script src="/scripts/chosenSeat.js"></script>
 <script src="/scripts/priceClass.js"></script>
 <script src="/scripts/getSummary.js"></script>
+<script src="/scripts/handleSeatSelection.js"></script>
 
 
 </body>
