@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    document.getElementById('journeyForm').addEventListener('submit', function(event) {
+        const fromStation = document.getElementById('from').value.trim();
+        const toStation = document.getElementById('to').value.trim();
+        if (fromStation === toStation) {
+            event.preventDefault();
+            alert('Stacja początkowa i końcowa nie mogą być takie same.');
+        }
+    });
+
+
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
