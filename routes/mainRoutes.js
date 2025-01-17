@@ -1,5 +1,6 @@
 import express from 'express';
-import {renderMainPage,
+import {
+    renderMainPage,
     renderTrainRoutes,
     renderWallet,
     renderUserProfile,
@@ -8,7 +9,8 @@ import {renderMainPage,
     renderModals,
     searchConnections,
     renderBuyTicket,
-    renderSummary}
+    renderSummary, renderSeatChoicePanel
+}
     from "../controllers/mainController.js";
 
 const router = express.Router();
@@ -23,5 +25,6 @@ router.get('/modals', renderModals);
 router.post('/searchConnections', searchConnections);
 router.get('/buyTicket', renderBuyTicket);
 router.get('/summary', renderSummary);
+router.get('/seatChoice', renderSeatChoicePanel);
 
 export default router;
