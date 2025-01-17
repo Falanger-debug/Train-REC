@@ -131,3 +131,20 @@ body {
         max-width: 70%;
     }
 }
+
+
+#journeyForm .icon-input {
+    position: relative;
+}
+
+#journeyForm .icon-input i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+#journeyForm .icon-input input {
+    padding-left: 30px;
+}

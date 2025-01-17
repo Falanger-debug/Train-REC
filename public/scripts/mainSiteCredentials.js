@@ -1,14 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    document.getElementById('journeyForm').addEventListener('submit', function(event) {
-        const fromStation = document.getElementById('from').value.trim();
-        const toStation = document.getElementById('to').value.trim();
-        if (fromStation === toStation) {
-            event.preventDefault();
-            alert('Stacja początkowa i końcowa nie mogą być takie same.');
+    const form = document.getElementById('journeyForm');
+    const errorMessages = document.getElementById('errorMessages');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        errorMessages.style.display = 'none';
+        errorMessages.innerHTML = '';
+
+        const from = document.getElementById('from').value.trim();
+        const to = document.getElementById('to').value.trim();
+
+        if (from === '') {
+            const error = document.createElement('h5');
+            error.textContent = 'Proszę podać stację początkową.';
+            errorMessages.appendChild(error);
+        }
+
+        if (to === '') {
+            const error = document.createElement('h5');
+            error.textContent = 'Proszę podać stację końcową.';
+            errorMessages.appendChild(error);
+        }
+
+        if (from === to) {
+            const error = document.createElement('h5');
+            error.textContent = 'Stacja początkowa i końcowa muszą być różne.';
+            errorMessages.appendChild(error);
+        }
+
+        if (errorMessages.innerHTML !== '') {
+            errorMessages.style.display = 'block';
+        } else {
+            form.submit();
         }
     });
-
 
     const today = new Date();
     const year = today.getFullYear();
