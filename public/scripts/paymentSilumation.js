@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const walletBalanceElement = document.getElementById('walletBalance');
     const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
     const paymentModalMessage = document.getElementById('paymentModalMessage');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const countdownMessage = document.getElementById('countdownMessage');
+
     let walletBalance = parseFloat(walletBalanceElement.textContent);
+    let paymentSuccessful = false;
+    let countdownTimer;
 
     blikMethod.addEventListener('click', function() {
         blikForm.style.display = 'block';
@@ -24,24 +29,65 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmBlikPayment.addEventListener('click', function() {
         const code = blikCode.value.trim();
         if (code.length === 6 && !isNaN(code)) {
+            paymentSuccessful = true;
             paymentModalMessage.innerHTML = '<span class="text-success">Płatność BLIK zakończona pomyślnie.</span>';
+            startRedirectCountdown();
         } else {
+            paymentSuccessful = false;
             paymentModalMessage.innerHTML = '<span class="text-danger">Nieprawidłowy kod BLIK. Spróbuj ponownie.</span>';
+            closeModalButton.innerText = 'Zamknij';
         }
         paymentModal.show();
     });
 
     confirmWalletPayment.addEventListener('click', function() {
-        const paymentAmount = 50.00; // Przykładowa kwota płatności
+        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
         if (walletBalance >= paymentAmount) {
+            paymentSuccessful = true;
             walletBalance -= paymentAmount;
             walletBalanceElement.textContent = walletBalance.toFixed(2);
             paymentModalMessage.innerHTML = '<span class="text-success">Płatność z Portfela zakończona pomyślnie.</span>';
+            startRedirectCountdown();
         } else {
+            paymentSuccessful = false;
             paymentModalMessage.innerHTML = '<span class="text-danger">Niewystarczające środki w portfelu.</span>';
+            closeModalButton.innerText = 'Zamknij';
         }
         paymentModal.show();
     });
+
+    paymentModal._element.addEventListener('hidden.bs.modal', function() {
+        clearInterval(countdownTimer);
+        countdownMessage.textContent = '';
+        if (paymentSuccessful){
+            window.location.href = '/userProfile';
+        }
+    });
+
+    function handleCloseRedirect() {
+        if (paymentSuccessful) {
+            window.location.href = '/userProfile';
+        }
+    }
+
+    function startRedirectCountdown() {
+        let countdown = 5;
+        countdownMessage.textContent = `Przekierowanie nastąpi za ${countdown} sekund...`;
+
+        countdownTimer = setInterval(() => {
+            countdown--;
+            if(countdown > 0) {
+                countdownMessage.textContent = `Przekierowanie nastąpi za ${countdown} sekund...`;
+            } else {
+                clearInterval(countdownTimer);
+                handleCloseRedirect();
+            }
+        }, 1000);
+
+    }
+
+
+    closeModalButton.addEventListener('click', handleCloseRedirect);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
