@@ -21,33 +21,33 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="form-container">
         <h2>ZAPLANUJ PODRÓŻ:</h2>
-        <form action="/searchConnections" method="POST">
+        <form id="journeyForm" action="/searchConnections" method="POST">
             <div class="mb-3 icon-input">
-
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="from" class="form-control" placeholder="Stacja początkowa">
-
-
+                <input type="text" id="from" name="from" class="form-control" placeholder="Stacja początkowa" list="stations" required>
             </div>
             <div class="mb-3 icon-input">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="to" class="form-control" placeholder="Stacja końcowa">
+                <input type="text" id="to" name="to" class="form-control" placeholder="Stacja końcowa" list="stations" required>
             </div>
+            <datalist id="stations">
+                <option value="Warszawa Centralna">
+                <option value="Kraków Główny">
+                <option value="Gdańsk Główny">
+                <option value="Wrocław Główny">
+                <option value="Poznań Główny">
+            </datalist>
             <div class="row g-3">
                 <div class="col-6 icon-input">
-
                     <i class="fas fa-calendar-alt"></i>
-                    <input type="date" name="date" class="form-control">
-
+                    <input type="date" id="date" name="date" class="form-control" required>
                 </div>
                 <div class="col-6 icon-input">
-
                     <i class="fas fa-clock"></i>
-                    <input type="time" name="hour" class="form-control">
-
-
+                    <input type="time" id="time" name="hour" class="form-control" required>
                 </div>
             </div>
+            <div id="errorMessages" class="alert alert-danger mt-3 bg-white" style="display: none;"></div>
             <div class="text-center mt-4">
                 <button class="btn btn-search w-100" type="submit">Wyszukaj</button>
             </div>
@@ -55,11 +55,11 @@
     </div>
 </div>
 
-
 <%- include('partials/footer') %>
 <!--Bootstrap JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script src="/scripts/mainSiteCredentials.js"></script>
 </body>
 </html>

@@ -28,13 +28,15 @@
                       <h1 class="fw-bold mb-0 fs-2">Zarejestruj się</h1>
                     </div>
                     <div class="modal-body p-5 pt-0">
-                      <form class="">
+                      <form class="" action="/register" method="POST">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="Email">
+                            <input type="email" class="form-control rounded-3" id="floatingInput" name="Email"
+                                   placeholder="Email" required>
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Hasło">
+                            <input type="password" class="form-control rounded-3" id="floatingPassword" name="password"
+                                   placeholder="Hasło" required>
                             <label for="floatingPassword">Hasło</label>
                         </div>
                         <div class="form-floating mb-3">

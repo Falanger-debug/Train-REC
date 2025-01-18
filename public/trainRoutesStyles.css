@@ -66,3 +66,15 @@
         max-width: 70px;
     }
 }
+
+#goBackButton {
+    margin-left: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#goBackButton:hover {
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+}

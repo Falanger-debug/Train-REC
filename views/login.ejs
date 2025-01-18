@@ -10,6 +10,7 @@
     <!--Custom Styling-->
     <link rel="stylesheet" href="/mainStyles.css">
     <link rel="stylesheet" href="/headerStyles.css">
+    <link rel="stylesheet" href="/loginStyles.css">
     <!--FontAwesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -21,25 +22,43 @@
 
     <!----------------------------------------------------------------------------------------->
 
+
     <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="form-container col-6">
+        <div class="form-container col-12 col-md-8 col-lg-6">
             <div class="form-container bg-white text-dark">
                 <div class="modal-header p-5 pb-4 border-bottom-0">
-                    <h1 class="fw-bold mb-0 fs-2">Zaloguj się</h1>
+                    <h1 class="fw-bold mb-0 fs-2">
+                        Witaj Ponownie
+                        <i class="fa-solid fa-handshake"></i>
+                    </h1>
                 </div>
-            
+
                 <div class="modal-body p-5 pt-0">
-                    <form class="">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="Email">
-                        <label for="floatingInput">Email</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Hasło">
-                        <label for="floatingPassword">Hasło</label>
-                    </div>
-                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-danger" type="submit">Zaloguj</button>
-                    <small class="text-body-secondary">Nie pamiętam hasła</small>
+                    <form action="/login" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
+                                   placeholder="Email" list="emails" required>
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <datalist id="emails">
+                            <option value="user@example.com"></option>
+                        </datalist>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                   name="password" placeholder="Hasło" required>
+                            <label for="floatingPassword">Hasło</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-search" id="loginButton" type="submit">
+                            Zaloguj
+                        </button>
+
+                        <div class="row justify-content-center">
+                            <small class="text-body-secondary col-12 text-center">
+                                <a href="/register" class="text-decoration-none text-success">
+                                    <h5>Zarejestruj się</h5>
+                                </a>
+                            </small>
+                        </div>
                     </form>
                 </div>
             </div>

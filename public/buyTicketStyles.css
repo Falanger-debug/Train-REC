@@ -178,8 +178,8 @@ input:checked + .slider:before {
     display: block;
     margin: 30px auto 0 auto;
     padding: 15px 30px;
-    background-color: var(--orange-color);
-    border-color: var(--orange-color);
+    background-color: var(--green-color);
+    border-color: var(--green-color);
     font-size: x-large;
 }
 
@@ -199,4 +199,35 @@ input:checked + .slider:before {
 
 #seatChooser, #class1Btn{
     margin-left: 5px;
+}
+
+#class1Btn, #class2Btn {
+    border: solid 2px black;
+    color: black;
+
+
+}
+.btn-active {
+    /*border: 3px solid lightgreen !important;*/
+    background-color: lightgreen !important;
+    color: black;
+}
+
+
+
+#goBackButton {
+    color: blue;
+    background-color: white;
+    border-color: white;
+}
+
+#goBackButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+#summaryBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }

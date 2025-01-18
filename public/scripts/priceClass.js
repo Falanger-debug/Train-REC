@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     class1Btn.addEventListener('click', () => {
         resetButtons();
         class1Btn.classList.add('active');
+        class1Btn.classList.add('btn-active');
         selectedMultiplier = 1.5; // Klasa 1 ma wyższy mnożnik
         updateTotalPrice();
     });
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     class2Btn.addEventListener('click', () => {
         resetButtons();
         class2Btn.classList.add('active');
+        class2Btn.classList.add('btn-active');
         selectedMultiplier = 1; // Domyślny mnożnik dla Klasy 2
         updateTotalPrice();
     });
@@ -46,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetButtons() {
         class1Btn.classList.remove('active');
         class2Btn.classList.remove('active');
+        class1Btn.classList.remove('btn-active');
+        class2Btn.classList.remove('btn-active');
     }
 
     // Inicjalne ustawienie ceny

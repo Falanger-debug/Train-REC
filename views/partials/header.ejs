@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <div class="d-flex align-items-center">
-            <a href="/" class="d-flex align-items-center text-decoration-none text-white" id="main_link">            
+            <a href="/" class="d-flex align-items-center text-decoration-none text-white" id="main_link">
                 <img src="/images/train.png" alt="LOGO" class="me-2" style="width: 50px;">
                 <h1>Train-REC</h1>
             </a>
@@ -9,30 +9,50 @@
         </div>
 
         <div class="d-flex">
-            <a href="/wallet" class="nav-link text-white">
-                <i class="fa-solid fa-wallet"></i>
-                <span id="headerSpan">Wallet</span>
-            </a>
+            <% if (isLoggedIn) { %>
+                <a href="/wallet" class="nav-link text-white">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span id="walletSpan">Portfel</span>
+                </a>
+            <% } %>
+
             <a href="#" class="nav-link text-white">
                 <i class="fas fa-globe"></i>
-                <span id="headerSpan">PL</span>
+                <span id="languageSpan">PL</span>
             </a>
-            <a href="/userProfile" class="nav-link text-white">
-                <i class="fas fa-user"></i>
-                <span id="headerSpan">User</span>
-            </a>
-            <a href="/modals" class="nav-link text-white">
-                <i class="fas fa-user"></i>
-                <span id="headerSpan">Test okienek modalnych</span>
-            </a>
-            <a href="/login" class="nav-link text-white">
-                <i class="fas fa-user"></i>
-                <span id="headerSpan">Login</span>
-            </a>
-            <a href="/register" class="nav-link text-white">
-                <i class="fas fa-user"></i>
-                <span id="headerSpan">Register</span>
-            </a>
+
+            <% if (!isLoggedIn) { %>
+                <a href="/login" class="nav-link text-white" id="loginLink">
+                    <i class="fas fa-user"></i>
+                    <span id="logInSpan">Zaloguj</span>
+                </a>
+            <% } %>
+
+            <% if (isLoggedIn) { %>
+                <a href="/userProfile" class="nav-link text-white" id="userProfileLink">
+                    <i class="fas fa-user"></i>
+                    <span id="headerSpan">Twoje Konto</span>
+                </a>
+            <% } %>
+
+            <% if (isLoggedIn) { %>
+                <a href="/logout" class="nav-link text-white" id="logoutLink">
+                    <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="color: #ffffff;"></i>
+                    <span id="logoutSpan">Wyloguj</span>
+                </a>
+            <% } %>
+
+
+            <!--                        <a href="/register" class="nav-link text-white">-->
+            <!--                            <i class="fas fa-user"></i>-->
+            <!--                            <span id="headerSpan">Zarejestruj</span>-->
+            <!--                        </a>-->
+            <!--                        <a href="/modals" class="nav-link text-white">-->
+            <!--                            <i class="fas fa-user"></i>-->
+            <!--                            <span id="headerSpan">Test okienek modalnych</span>-->
+            <!--                        </a>-->
         </div>
     </div>
 </nav>
+
+<!--<script src="/scripts/handleHeaderRedirects.js"></script>-->

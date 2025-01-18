@@ -1,31 +1,99 @@
+const users = [
+    { email: 'user@example.com', password: '123', loggedIn: false}
+];
+
 const renderMainPage = (req, res) => {
-    res.render('main');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('main', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderTrainRoutes = (req, res) => {
-    res.render('trainRoutes');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('trainRoutes', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderWallet = (req, res) => {
-    res.render('wallet');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('wallet', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderUserProfile = (req, res) => {
-    res.render('userProfile');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('userProfile', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderLogin = (req, res) => {
-    res.render('login');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(!isLoggedIn) {
+        res.render('login', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/');
+    }
 };
 
+const loginUser = (req, res) => {
+    const { email, password } = req.body;
+
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) {
+        user.loggedIn = true;
+        req.session.user = user;
+        res.redirect('/');
+    } else {
+        res.send('Błędne dane logowania');
+    }
+}
+
+const logoutUser = (req, res) => {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        req.session.user.loggedIn = false;
+        req.session.destroy(() => {
+            res.redirect('/login');
+        });
+    } else {
+        res.redirect('/login');
+    }
+
+}
+
 const renderRegister = (req, res) => {
-    res.render('register');
+    if(!req.session.user || !req.session.user.loggedIn) {
+        res.render('register', { user: req.session.user });
+    } else {
+        res.redirect('/main');
+    }
 };
+
+const registerUser = (req, res) => {
+    const { email, password } = req.body;
+    users.push({ email, password });
+    res.redirect('/login');
+}
 
 const renderModals = (req, res) => {
     res.render('modals');
 };
 const searchConnections = (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
     const { from, to, date, hour } = req.body;
     const connection = {
         from,
@@ -73,16 +141,23 @@ const renderSeatChoicePanel = (req, res) => {
     res.render('seatChoicePanel');
 }
 
+const renderPayForTicket = (req, res) => {
+    res.render('payForTicket');
+}
 
 export { renderMainPage,
     renderTrainRoutes,
     renderWallet,
     renderUserProfile,
     renderLogin,
+    loginUser,
+    logoutUser,
     renderRegister,
+    registerUser,
     renderModals,
     searchConnections,
     renderBuyTicket,
     renderSummary,
-    renderSeatChoicePanel
+    renderSeatChoicePanel,
+    renderPayForTicket
 };

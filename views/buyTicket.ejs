@@ -23,8 +23,12 @@
 
 
 <div class="submit-container">
+    <button class="btn btn-outline-primary mt-3" id="goBackButton" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
 
     <div class="container table-container">
+
         <h1 class="text-center">Wybrane połączenie:</h1>
         <div class="row border-bottom border-top pb-2 pt-1 d-flex align-items-center">
             <div class="col-6 fw-bold d-flex justify-content-center align-items-center">Skąd</div>
@@ -66,7 +70,7 @@
     <div class="choice-container text-center">
         <div class="container my-4" id="discountChooser">
             <label for="discount" class="form-label">Wybierz ulgę</label>
-            <select id="discount" class="form-select form-select-lg">
+            <select id="discount" class="form-select form-select-lg" onchange="handleDiscountChange()">
                 <option value="brak" selected>Brak ulgi</option>
                 <option value="student">Ulga studencka (51%)</option>
                 <option value="school">Ulga szkolna (37%)</option>
@@ -77,7 +81,7 @@
 
         <div class="container my-4" id="seatChooser">
             <label for="seat" class="form-label">Wybierz miejsce</label>
-            <select id="seat" class="form-select form-select-lg">
+            <select id="seat" class="form-select form-select-lg" onchange="handleSeatSelection()">
                 <option value="dowolny" selected>Dowolne miejsce</option>
                 <option value="schemat">Wybierz ze schematu</option>
                 <option value="bezprzedzialowy">Wagon bezprzedziałowy</option>
@@ -95,10 +99,10 @@
     </div>
 
     <div id="classchoice">
-        <button type="button" class="btn btn-primary btn-lg" id="class2Btn">
+        <button type="button" class="btn btn-custom bg-white btn-lg" id="class2Btn" data-toggle="button">
             Klasa 2
         </button>
-        <button type="button" class="btn btn-primary btn-lg" id="class1Btn">
+        <button type="button" class="btn btn-custom bg-white btn-lg" id="class1Btn" data-toggle="button">
             <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
             Klasa 1
             <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
@@ -125,6 +129,7 @@
     <div class="container my-4">
         <button class="btn btn-success btn-lg" id="summaryBtn"><b>Podsumowanie</b></button>
     </div>
+
 </div>
 
 
@@ -195,6 +200,7 @@
 <script src="/scripts/priceClass.js"></script>
 <script src="/scripts/getSummary.js"></script>
 <script src="/scripts/handleSeatSelection.js"></script>
+<script src="/scripts/handleDiscountChange.js"></script>
 
 
 </body>

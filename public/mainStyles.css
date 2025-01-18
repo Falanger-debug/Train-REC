@@ -1,7 +1,9 @@
 :root {
     --blue-color: #1b296f;
+    --ligher-blue-color: #0c6efc;
     --orange-color: #f02424;
     --darker-orange-color: #cc0000;
+    --green-color: green;
 }
 
 body {
@@ -29,7 +31,7 @@ body {
 }
 
 .btn-search {
-    background-color: var(--orange-color);
+    background-color: green;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -37,7 +39,7 @@ body {
 }
 
 .btn-search:hover {
-    background-color: var(--darker-orange-color);
+    background-color: darkgreen;
 }
 
 .icon-input {
@@ -130,4 +132,21 @@ body {
     .form-container {
         max-width: 70%;
     }
+}
+
+
+#journeyForm .icon-input {
+    position: relative;
+}
+
+#journeyForm .icon-input i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+#journeyForm .icon-input input {
+    padding-left: 30px;
 }
