@@ -73,6 +73,9 @@ const renderSeatChoicePanel = (req, res) => {
     res.render('seatChoicePanel');
 }
 
+const renderPayForTicket = (req, res) => {
+    res.render('payForTicket');
+}
 
 export { renderMainPage,
     renderTrainRoutes,
@@ -84,5 +87,6 @@ export { renderMainPage,
     searchConnections,
     renderBuyTicket,
     renderSummary,
-    renderSeatChoicePanel
+    renderSeatChoicePanel,
+    renderPayForTicket
 };

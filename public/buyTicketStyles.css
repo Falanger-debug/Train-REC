@@ -222,8 +222,12 @@ input:checked + .slider:before {
 }
 
 #goBackButton:hover {
-    color: white;
-    background-color: green;
-    border-color: green;
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+
+#summaryBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
