@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // Express session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'pociągara',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
