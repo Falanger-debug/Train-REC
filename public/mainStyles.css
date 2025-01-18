@@ -31,7 +31,7 @@ body {
 }
 
 .btn-search {
-    background-color: var(--orange-color);
+    background-color: green;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -39,7 +39,7 @@ body {
 }
 
 .btn-search:hover {
-    background-color: var(--darker-orange-color);
+    background-color: darkgreen;
 }
 
 .icon-input {
