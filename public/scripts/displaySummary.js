@@ -39,6 +39,13 @@ function displaySummary() {
         `).join('');
 
     document.getElementById("summaryContent").innerHTML = rowsContent;
+
+    const paymentUrl = `/payment?class=${encodeURIComponent(selectedClass)}&discount=${encodeURIComponent(discount)}&seat=${encodeURIComponent(seat)}&price=${encodeURIComponent(price)}&wherefrom=${encodeURIComponent(wherefrom)}&whereto=${encodeURIComponent(whereto)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+
+    const buyButton = document.getElementById("buyButton");
+    if( buyButton ) {
+        buyButton.href=paymentUrl;
+    }
 }
 
 window.addEventListener('load', displaySummary);

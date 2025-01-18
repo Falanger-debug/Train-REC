@@ -3,36 +3,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const walletMethod = document.getElementById('walletMethod');
     const blikForm = document.getElementById('blikForm');
     const walletForm = document.getElementById('walletForm');
-    const paymentStatus = document.getElementById('paymentStatus');
-    const statusMessage = document.getElementById('statusMessage');
     const blikCode = document.getElementById('blikCode');
     const confirmBlikPayment = document.getElementById('confirmBlikPayment');
     const confirmWalletPayment = document.getElementById('confirmWalletPayment');
     const walletBalanceElement = document.getElementById('walletBalance');
+    const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+    const paymentModalMessage = document.getElementById('paymentModalMessage');
     let walletBalance = parseFloat(walletBalanceElement.textContent);
 
     blikMethod.addEventListener('click', function() {
         blikForm.style.display = 'block';
         walletForm.style.display = 'none';
-        paymentStatus.style.display = 'none';
     });
 
     walletMethod.addEventListener('click', function() {
         walletForm.style.display = 'block';
         blikForm.style.display = 'none';
-        paymentStatus.style.display = 'none';
     });
 
     confirmBlikPayment.addEventListener('click', function() {
         const code = blikCode.value.trim();
         if (code.length === 6 && !isNaN(code)) {
-            statusMessage.textContent = 'Płatność BLIK zakończona pomyślnie.';
-            statusMessage.className = 'text-success';
+            paymentModalMessage.innerHTML = '<span class="text-success">Płatność BLIK zakończona pomyślnie.</span>';
         } else {
-            statusMessage.textContent = 'Nieprawidłowy kod BLIK. Spróbuj ponownie.';
-            statusMessage.className = 'text-danger';
+            paymentModalMessage.innerHTML = '<span class="text-danger">Nieprawidłowy kod BLIK. Spróbuj ponownie.</span>';
         }
-        paymentStatus.style.display = 'block';
+        paymentModal.show();
     });
 
     confirmWalletPayment.addEventListener('click', function() {
@@ -40,12 +36,36 @@ document.addEventListener('DOMContentLoaded', function() {
         if (walletBalance >= paymentAmount) {
             walletBalance -= paymentAmount;
             walletBalanceElement.textContent = walletBalance.toFixed(2);
-            statusMessage.textContent = 'Płatność z Portfela zakończona pomyślnie.';
-            statusMessage.className = 'text-success';
+            paymentModalMessage.innerHTML = '<span class="text-success">Płatność z Portfela zakończona pomyślnie.</span>';
         } else {
-            statusMessage.textContent = 'Niewystarczające środki w portfelu.';
-            statusMessage.className = 'text-danger';
+            paymentModalMessage.innerHTML = '<span class="text-danger">Niewystarczające środki w portfelu.</span>';
         }
-        paymentStatus.style.display = 'block';
+        paymentModal.show();
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Funkcja do pobierania parametrów URL
+    function getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            class: urlParams.get('class'),
+            discount: urlParams.get('discount'),
+            seat: urlParams.get('seat'),
+            price: urlParams.get('price'),
+            wherefrom: urlParams.get('wherefrom'),
+            whereto: urlParams.get('whereto'),
+            from: urlParams.get('from'),
+            to: urlParams.get('to')
+        };
+    }
+
+    // Pobierz cenę z parametrów URL
+    const { price } = getUrlParams();
+
+    // Wyświetl cenę na stronie
+    if (price) {
+        const ticketPriceElement = document.getElementById('ticketPrice');
+        ticketPriceElement.textContent = parseFloat(price).toFixed(2) + " zł";
+    }
 });

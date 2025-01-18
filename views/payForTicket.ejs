@@ -23,11 +23,20 @@
 <%- include('partials/header') %>
 
 <div class="container mt-5">
+
     <div class="card shadow-lg border-light payment-panel">
 
 
-
         <h2 class="text-center mt-2">Wybierz metodę płatności</h2>
+
+        <div class="text-center my-4">
+            <h4 class="fw-bold">
+                <i class="fas fa-ticket-alt text-success me-2"></i>
+                Do zapłaty:
+                <span id="ticketPrice" class="text-success">0.00</span>
+            </h4>
+        </div>
+
         <div class="row mt-4">
             <div class="col-1 col-sm-0"></div>
 
@@ -53,24 +62,49 @@
             <div class="col-1 col-sm-0"></div>
         </div>
 
+
         <!-- Formularz BLIK -->
         <div class="mt-4 payment-form text-center" id="blikForm">
             <h4>Podaj kod BLIK</h4>
-            <input type="text" id="blikCode" class="form-control text-center" maxlength="6"
-                   placeholder="Wprowadź 6-cyfrowy kod BLIK">
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-4">
+                    <input type="text" id="blikCode" class="form-control text-center" maxlength="6"
+                           placeholder="Wprowadź 6-cyfrowy kod BLIK">
+                </div>
+            </div>
             <button class="btn btn-success mt-3" id="confirmBlikPayment">Potwierdź płatność BLIK</button>
         </div>
 
+
         <!-- Formularz Portfela -->
-        <div class="mt-4 payment-form" id="walletForm">
+        <div class="mt-4 payment-form text-center" id="walletForm">
             <h4>Saldo Portfela: <span id="walletBalance">100.00</span> zł</h4>
-            <button class="btn btn-success mt-3" id="confirmWalletPayment">Potwierdź płatność z Portfela</button>
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-4">
+                    <button class="btn btn-success w-100 mt-3" id="confirmWalletPayment">Potwierdź płatność z Portfela</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Informacja o statusie płatności -->
-        <div class="mt-4 payment-status text-center" id="paymentStatus">
-            <h4 id="statusMessage"></h4>
+
+        <!-- Modal do wyświetlania komunikatów -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="paymentModalLabel">Status płatności</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="paymentModalMessage">
+                        <!-- Komunikat o statusie płatności -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 
