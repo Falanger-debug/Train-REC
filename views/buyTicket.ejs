@@ -70,7 +70,7 @@
     <div class="choice-container text-center">
         <div class="container my-4" id="discountChooser">
             <label for="discount" class="form-label">Wybierz ulgę</label>
-            <select id="discount" class="form-select form-select-lg">
+            <select id="discount" class="form-select form-select-lg" onchange="handleDiscountChange()">
                 <option value="brak" selected>Brak ulgi</option>
                 <option value="student">Ulga studencka (51%)</option>
                 <option value="school">Ulga szkolna (37%)</option>
@@ -99,10 +99,10 @@
     </div>
 
     <div id="classchoice">
-        <button type="button" class="btn btn-custom btn-lg" id="class2Btn" data-toggle="button">
+        <button type="button" class="btn btn-custom bg-white btn-lg" id="class2Btn" data-toggle="button">
             Klasa 2
         </button>
-        <button type="button" class="btn btn-custom btn-lg" id="class1Btn" data-toggle="button">
+        <button type="button" class="btn btn-custom bg-white btn-lg" id="class1Btn" data-toggle="button">
             <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
             Klasa 1
             <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
@@ -200,6 +200,7 @@
 <script src="/scripts/priceClass.js"></script>
 <script src="/scripts/getSummary.js"></script>
 <script src="/scripts/handleSeatSelection.js"></script>
+<script src="/scripts/handleDiscountChange.js"></script>
 
 
 </body>
