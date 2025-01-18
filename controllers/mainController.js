@@ -1,31 +1,50 @@
 const users = [
-    { email: 'user@example.com', password: '123'}
+    { email: 'user@example.com', password: '123', loggedIn: false}
 ];
 
 const renderMainPage = (req, res) => {
-    res.render('main', {
-        isLoggedIn: !!req.session.user
-    });
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('main', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderTrainRoutes = (req, res) => {
-    res.render('trainRoutes');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('trainRoutes', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderWallet = (req, res) => {
-    res.render('wallet');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('wallet', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderUserProfile = (req, res) => {
-    if(req.session.user && req.session.user.loggedIn) {
-        res.render('userProfile', { user: req.session.user });
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        res.render('userProfile', { user: req.session.user, isLoggedIn });
     } else {
         res.redirect('/login');
     }
 };
 
 const renderLogin = (req, res) => {
-    res.render('login');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(!isLoggedIn) {
+        res.render('login', { user: req.session.user, isLoggedIn });
+    } else {
+        res.redirect('/');
+    }
 };
 
 const loginUser = (req, res) => {
@@ -33,6 +52,7 @@ const loginUser = (req, res) => {
 
     const user = users.find(u => u.email === email && u.password === password);
     if (user) {
+        user.loggedIn = true;
         req.session.user = user;
         res.redirect('/');
     } else {
@@ -41,13 +61,24 @@ const loginUser = (req, res) => {
 }
 
 const logoutUser = (req, res) => {
-    req.session.destroy(() => {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if(isLoggedIn) {
+        req.session.user.loggedIn = false;
+        req.session.destroy(() => {
+            res.redirect('/login');
+        });
+    } else {
         res.redirect('/login');
-    });
+    }
+
 }
 
 const renderRegister = (req, res) => {
-    res.render('register');
+    if(!req.session.user || !req.session.user.loggedIn) {
+        res.render('register', { user: req.session.user });
+    } else {
+        res.redirect('/main');
+    }
 };
 
 const registerUser = (req, res) => {

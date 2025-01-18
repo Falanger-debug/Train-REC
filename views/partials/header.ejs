@@ -9,21 +9,12 @@
         </div>
 
         <div class="d-flex">
-            <a href="/wallet" class="nav-link text-white">
-                <span id="walletSpan"><p><%= isLoggedIn %></p>
-</span>
-            </a>
             <% if (isLoggedIn) { %>
                 <a href="/wallet" class="nav-link text-white">
                     <i class="fa-solid fa-wallet"></i>
                     <span id="walletSpan">Portfel</span>
                 </a>
             <% } %>
-
-            <a href="/wallet" class="nav-link text-white">
-                <i class="fa-solid fa-wallet"></i>
-                <span id="walletSpan">Portfel</span>
-            </a>
 
             <a href="#" class="nav-link text-white">
                 <i class="fas fa-globe"></i>
@@ -44,7 +35,6 @@
                 </a>
             <% } %>
 
-            <!-- Link do wylogowania -->
             <% if (isLoggedIn) { %>
                 <a href="/logout" class="nav-link text-white" id="logoutLink">
                     <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="color: #ffffff;"></i>
@@ -52,10 +42,6 @@
                 </a>
             <% } %>
 
-            <a href="/logout" class="nav-link text-white" id="logoutLink">
-                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="color: #ffffff;"></i>
-                <span id="logoutSpan">Wyloguj</span>
-            </a>
 
             <!--                        <a href="/register" class="nav-link text-white">-->
             <!--                            <i class="fas fa-user"></i>-->
