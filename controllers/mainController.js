@@ -1,3 +1,7 @@
+const users = [
+    { email: 'user@example.com', password: 'password123'}
+];
+
 const renderMainPage = (req, res) => {
     res.render('main');
 };
@@ -11,21 +15,52 @@ const renderWallet = (req, res) => {
 };
 
 const renderUserProfile = (req, res) => {
-    res.render('userProfile');
+    if(req.session.user && req.session.user.loggedIn) {
+        res.render('userProfile', { user: req.session.user });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderLogin = (req, res) => {
     res.render('login');
 };
 
+const loginUser = (req, res) => {
+    const { email, password } = req.body;
+
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) {
+        req.session.user = user;
+        res.redirect('/');
+    } else {
+        res.send('Błędne dane logowania');
+    }
+}
+
+const logoutUser = (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+}
+
 const renderRegister = (req, res) => {
     res.render('register');
 };
+
+const registerUser = (req, res) => {
+    const { email, password } = req.body;
+    users.push({ email, password });
+    res.redirect('/login');
+}
 
 const renderModals = (req, res) => {
     res.render('modals');
 };
 const searchConnections = (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
     const { from, to, date, hour } = req.body;
     const connection = {
         from,
@@ -82,7 +117,10 @@ export { renderMainPage,
     renderWallet,
     renderUserProfile,
     renderLogin,
+    loginUser,
+    logoutUser,
     renderRegister,
+    registerUser,
     renderModals,
     searchConnections,
     renderBuyTicket,

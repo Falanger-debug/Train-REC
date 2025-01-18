@@ -3,12 +3,22 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import mainRoutes from './routes/mainRoutes.js';
 import bodyParser from 'body-parser';
+import session from "express-session";
 
 const app = express();
 
 // Middleware dla parsera formularzy
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Express session configuration
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 
 const PORT = process.env.PORT || 8080;
 
