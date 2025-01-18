@@ -38,7 +38,13 @@ function displaySummary() {
             </li>
         `).join('');
 
-    document.getElementById("summaryContent").innerHTML = rowsContent;
+
+    const summaryContent = document.getElementById("summaryContent");
+    if (summaryContent) {
+        document.getElementById("summaryContent").innerHTML = rowsContent;
+    }
+
+
 
     const paymentUrl = `/payment?class=${encodeURIComponent(selectedClass)}&discount=${encodeURIComponent(discount)}&seat=${encodeURIComponent(seat)}&price=${encodeURIComponent(price)}&wherefrom=${encodeURIComponent(wherefrom)}&whereto=${encodeURIComponent(whereto)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
 
