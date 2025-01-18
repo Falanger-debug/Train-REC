@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Jeśli użytkownik jest zalogowany, ukryj link do logowania i pokaż link do profilu
         loginLink.style.display = 'none';
         logoutLink.style.display = 'inline'; // Link do wylogowania
-        userProfileLink.style.display = 'inline'; // Link do profilu
+        // userProfileLink.style.display = 'inline'; // Link do profilu
     } else {
         // Jeśli użytkownik nie jest zalogowany, ukryj link do profilu i pokaż link do logowania
         loginLink.style.display = 'inline';
         logoutLink.style.display = 'none';
-        userProfileLink.style.display = 'none';
+        // userProfileLink.style.display = 'none';
     }
 
     // Obsługa kliknięcia na przycisk logowania

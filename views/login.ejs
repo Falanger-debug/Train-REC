@@ -36,11 +36,16 @@
                 <div class="modal-body p-5 pt-0">
                     <form action="/login" method="POST">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-3" id="floatingInput" name="email" placeholder="Email" required>
+                            <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
+                                   placeholder="Email" list="emails" required>
                             <label for="floatingInput">Email</label>
                         </div>
+                        <datalist id="emails">
+                            <option value="user@example.com"></option>
+                        </datalist>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-3" id="floatingPassword" name="password" placeholder="Hasło" required>
+                            <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                   name="password" placeholder="Hasło" required>
                             <label for="floatingPassword">Hasło</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-search" id="loginButton" type="submit">

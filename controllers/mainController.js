@@ -1,9 +1,11 @@
 const users = [
-    { email: 'user@example.com', password: 'password123'}
+    { email: 'user@example.com', password: '123'}
 ];
 
 const renderMainPage = (req, res) => {
-    res.render('main');
+    res.render('main', {
+        isLoggedIn: !!req.session.user
+    });
 };
 
 const renderTrainRoutes = (req, res) => {

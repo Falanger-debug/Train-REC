@@ -20,6 +20,13 @@ app.use(session({
 }));
 
 
+// middleware for isLoggedIn for all views
+app.use((req, res, next) => {
+    console.log('Session:', req.session)
+    res.locals.isLoggedIn = !!req.session.user;
+    next();
+});
+
 const PORT = process.env.PORT || 8080;
 
 
