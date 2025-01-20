@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Funkcja do pobierania parametrów URL
     function getUrlParams() {
         const urlParams = new URLSearchParams(window.location.search);
         return {
@@ -106,10 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Pobierz cenę z parametrów URL
     const { price } = getUrlParams();
 
-    // Wyświetl cenę na stronie
     if (price) {
         const ticketPriceElement = document.getElementById('ticketPrice');
         ticketPriceElement.textContent = parseFloat(price).toFixed(2) + " zł";
