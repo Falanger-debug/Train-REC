@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+
 const users = [];
 
 
@@ -23,11 +24,60 @@ const renderTrainRoutes = (req, res) => {
 const renderWallet = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     if (isLoggedIn) {
-        res.render('wallet', {user: req.session.user, isLoggedIn});
+        res.render('wallet', {user: req.session.user, isLoggedIn, wallet: req.session.user.wallet});
     } else {
         res.redirect('/login');
     }
 };
+
+const payIntoWallet = (req, res) => {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        const {amount} = req.body;
+        const user = req.session.user || null;
+
+        if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+            user.wallet += parseFloat(amount);
+            res.render('wallet', {user, isLoggedIn, wallet: user.wallet});
+        } else {
+            res.render('wallet', {user, isLoggedIn, wallet: user.wallet, errorMessage: 'Invalid amount'});
+        }
+    } else {
+        res.redirect('/login');
+    }
+};
+
+const payOutOfWallet = (req, res) => {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        const {amount} = req.body;
+        const user = req.session.user || null;
+
+        if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+            if (user.wallet >= parseFloat(amount)) {
+                user.wallet -= parseFloat(amount);
+                return res.json({
+                    success: true,
+                    message: 'Płatność z portfela zakończona powodzeniem.',
+                    wallet: user.wallet.toFixed(2)
+                });
+            } else {
+                return res.json({
+                    success: false, message: 'Niewystarczające środki w portfelu.', wallet: user.wallet.toFixed(2)
+                });
+            }
+        } else {
+            return res.json({
+                success: false, message: 'Nieprawidłowa kwota.', wallet: user.wallet.toFixed(2)
+            });
+        }
+    } else {
+        return res.json({
+            success: false, message: 'Użytkownik nie jest zalogowany.', wallet: 0
+        });
+    }
+
+}
 
 const renderUserProfile = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
@@ -60,8 +110,7 @@ const loginUser = async (req, res) => {
     } else {
         console.log('Error Message: Błędne dane logowania');
         res.status(401).render('login', {
-            errorMessage: 'Błędne dane logowania',
-            email
+            errorMessage: 'Błędne dane logowania', email
         });
     }
 }
@@ -97,65 +146,95 @@ const registerUser = async (req, res) => {
         res.status(409).render('register', {errorMessage: 'Użytkownik o podanym adresie email już istnieje', email});
     } else {
         const hashedPassword = await bcrypt.hash(password, 10);
-        users.push({email, password: hashedPassword, loggedIn: false});
+        users.push({email, password: hashedPassword, loggedIn: false, wallet: 0});
         console.log('Aktualna tablica users:', users);
         res.redirect('/login');
     }
 }
 
 const renderModals = (req, res) => {
-    res.render('modals');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        res.render('modals');
+    } else {
+        res.redirect('/login');
+    }
 };
 const searchConnections = (req, res) => {
-    if (!req.session.user) {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        const {from, to, date, hour} = req.body;
+        const connection = {
+            from, to, date, hour
+        };
+        res.render('trainRoutes', {connection});
+    } else {
         return res.redirect('/login');
     }
-    const {from, to, date, hour} = req.body;
-    const connection = {
-        from, to, date, hour
-    };
-    res.render('trainRoutes', {connection});
 };
 
 const renderBuyTicket = (req, res) => {
-    const {from, to, duration, connections, price, wherefrom, whereto} = req.query;
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        const {from, to, duration, connections, price, wherefrom, whereto} = req.query;
 
-    if (!from || !to || !duration || !price) {
-        return res.status(400).send("Missing required query parameters.");
-    }
+        if (!from || !to || !duration || !price) {
+            return res.status(400).send("Missing required query parameters.");
+        }
 
-    const ticket = {
-        from, to, duration, connections, price, wherefrom, whereto
+        const ticket = {
+            from, to, duration, connections, price, wherefrom, whereto
+        }
+        res.render('buyTicket', {ticket});
+    } else {
+        res.redirect('/login');
     }
-    res.render('buyTicket', {ticket});
 };
 
 const renderSummary = (req, res) => {
-    const {class: wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice} = req.query;
-    res.render('summary', {
-        wherefrom: wherefrom || 'Nie wybrano',
-        whereto: whereto || 'Nie wybrano',
-        from: from || 'Nie wybrano',
-        to: to || 'Nie wybrano',
-        selectedClass: selectedClass || 'Nie wybrano',
-        discount: discount || 'Brak ulgi',
-        seat: seat || 'Nie wybrane',
-        finalPrice: finalPrice || 'Brak ceny'
-    });
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+
+    if (isLoggedIn) {
+        const {class: wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice} = req.query;
+        res.render('summary', {
+            wherefrom: wherefrom || 'Nie wybrano',
+            whereto: whereto || 'Nie wybrano',
+            from: from || 'Nie wybrano',
+            to: to || 'Nie wybrano',
+            selectedClass: selectedClass || 'Nie wybrano',
+            discount: discount || 'Brak ulgi',
+            seat: seat || 'Nie wybrane',
+            finalPrice: finalPrice || 'Brak ceny'
+        });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 const renderSeatChoicePanel = (req, res) => {
-    res.render('seatChoicePanel');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        res.render('seatChoicePanel');
+    } else {
+        res.redirect('/login');
+    }
 }
 
 const renderPayForTicket = (req, res) => {
-    res.render('payForTicket');
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    if (isLoggedIn) {
+        res.render('payForTicket', {user: req.session.user, isLoggedIn, wallet: req.session.user.wallet});
+    } else {
+        res.redirect('/login');
+    }
 }
 
 export {
     renderMainPage,
     renderTrainRoutes,
     renderWallet,
+    payIntoWallet,
+    payOutOfWallet,
     renderUserProfile,
     renderLogin,
     loginUser,

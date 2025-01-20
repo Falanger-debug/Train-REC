@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const blikMethod = document.getElementById('blikMethod');
     const walletMethod = document.getElementById('walletMethod');
     const blikForm = document.getElementById('blikForm');
@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let paymentSuccessful = false;
     let countdownTimer;
 
-    blikMethod.addEventListener('click', function() {
+    blikMethod.addEventListener('click', function () {
         blikForm.style.display = 'block';
         walletForm.style.display = 'none';
     });
 
-    walletMethod.addEventListener('click', function() {
+    walletMethod.addEventListener('click', function () {
         walletForm.style.display = 'block';
         blikForm.style.display = 'none';
     });
 
-    confirmBlikPayment.addEventListener('click', function() {
+    confirmBlikPayment.addEventListener('click', function () {
         const code = blikCode.value.trim();
         if (code.length === 6 && !isNaN(code)) {
             paymentSuccessful = true;
@@ -41,25 +41,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     confirmWalletPayment.addEventListener('click', function() {
-        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
+        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);  // Pobieramy cenę biletu
+
         if (walletBalance >= paymentAmount) {
-            paymentSuccessful = true;
-            walletBalance -= paymentAmount;
-            walletBalanceElement.textContent = walletBalance.toFixed(2);
-            paymentModalMessage.innerHTML = '<span class="text-success">Płatność z Portfela zakończona pomyślnie.</span>';
-            startRedirectCountdown();
+            fetch('/payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: paymentAmount })  // Przesyłamy kwotę płatności
+            })
+                .then(response => response.json())  // Oczekujemy odpowiedzi w formacie JSON
+                .then(data => {
+                    if (data.success) {
+                        // Jeśli płatność zakończona pomyślnie, aktualizujemy saldo na UI
+                        walletBalanceElement.textContent = data.wallet;  // Zaktualizowane saldo portfela
+                        paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;
+                        startRedirectCountdown();
+                    } else {
+                        paymentModalMessage.innerHTML = `<span class="text-danger">${data.message}</span>`;
+                    }
+
+                    closeModalButton.innerText = 'Zamknij';
+                    paymentModal.show();
+                })
+                .catch(_ => {
+                    paymentModalMessage.innerHTML = '<span class="text-danger">Błąd połączenia. Spróbuj ponownie.</span>';
+                    closeModalButton.innerText = 'Zamknij';
+                    paymentModal.show();
+                });
         } else {
-            paymentSuccessful = false;
             paymentModalMessage.innerHTML = '<span class="text-danger">Niewystarczające środki w portfelu.</span>';
             closeModalButton.innerText = 'Zamknij';
+            paymentModal.show();
         }
-        paymentModal.show();
+    });
+    confirmWalletPayment.addEventListener('click', function() {
+        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);  // Pobieramy cenę biletu
+
+        if (walletBalance >= paymentAmount) {
+            fetch('/payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: paymentAmount })  // Przesyłamy kwotę płatności
+            })
+                .then(response => response.json())  // Oczekujemy odpowiedzi w formacie JSON
+                .then(data => {
+                    if (data.success) {
+                        // Jeśli płatność zakończona pomyślnie, aktualizujemy saldo na UI
+                        walletBalanceElement.textContent = data.wallet;  // Zaktualizowane saldo portfela
+                        paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;
+                        startRedirectCountdown();
+                    } else {
+                        paymentModalMessage.innerHTML = `<span class="text-danger">${data.message}</span>`;
+                    }
+
+                    closeModalButton.innerText = 'Zamknij';
+                    paymentModal.show();
+                })
+                .catch(_ => {
+                    paymentModalMessage.innerHTML = '<span class="text-danger">Błąd połączenia. Spróbuj ponownie.</span>';
+                    closeModalButton.innerText = 'Zamknij';
+                    paymentModal.show();
+                });
+        } else {
+            paymentModalMessage.innerHTML = '<span class="text-danger">Niewystarczające środki w portfelu.</span>';
+            closeModalButton.innerText = 'Zamknij';
+            paymentModal.show();
+        }
     });
 
-    paymentModal._element.addEventListener('hidden.bs.modal', function() {
+
+
+    paymentModal._element.addEventListener('hidden.bs.modal', function () {
         clearInterval(countdownTimer);
         countdownMessage.textContent = '';
-        if (paymentSuccessful){
+        if (paymentSuccessful) {
             window.location.href = '/userProfile';
         }
     });
@@ -76,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         countdownTimer = setInterval(() => {
             countdown--;
-            if(countdown > 0) {
+            if (countdown > 0) {
                 countdownMessage.textContent = `Przekierowanie nastąpi za ${countdown} sekund...`;
             } else {
                 clearInterval(countdownTimer);
@@ -105,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    const { price } = getUrlParams();
+    const {price} = getUrlParams();
 
     if (price) {
         const ticketPriceElement = document.getElementById('ticketPrice');

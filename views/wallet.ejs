@@ -28,14 +28,13 @@
 
         <!-- Balance -->
         <div class="wallet-balance">
-            Dostępne środki: <span>0 zł</span>
+            Dostępne środki: <span> <%= wallet %>  zł</span>
         </div>
 
-        <!-- Form -->
-        <form>
+        <form method="POST" action="/wallet">
             <div class="mb-3">
                 <label for="amount" class="form-label">Kwota doładowania (zł)</label>
-                <input id="amount" type="number" class="form-control" placeholder="Wprowadź kwotę" min="1" required>
+                <input id="amount" name="amount" type="number" class="form-control" placeholder="Wprowadź kwotę" min="1" required>
             </div>
 
             <div class="mb-3">
