@@ -41,7 +41,7 @@ const renderUserProfile = (req, res) => {
 const renderLogin = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     if (!isLoggedIn) {
-        res.render('login', {user: req.session.user, isLoggedIn});
+        res.render('login', {user: req.session.user, isLoggedIn, errorMessage: null});
     } else {
         res.redirect('/');
     }
@@ -58,7 +58,11 @@ const loginUser = async (req, res) => {
         req.session.user = user;
         res.redirect('/');
     } else {
-        res.status(401).send('Błędne dane logowania');
+        console.log('Error Message: Błędne dane logowania');
+        res.status(401).render('login', {
+            errorMessage: 'Błędne dane logowania',
+            email
+        });
     }
 }
 
@@ -79,7 +83,7 @@ const renderRegister = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     const user = req.session.user || null;
     if (!isLoggedIn) {
-        res.render('register', {user});
+        res.render('register', {user, errorMessage: null});
     } else {
         res.redirect('/main');
     }
@@ -90,7 +94,7 @@ const registerUser = async (req, res) => {
     const existingUser = users.find(u => u.email === email);
 
     if (existingUser) {
-        res.status(409).send('Użytkownik o podanym adresie email już istnieje');
+        res.status(409).render('register', {errorMessage: 'Użytkownik o podanym adresie email już istnieje', email});
     } else {
         const hashedPassword = await bcrypt.hash(password, 10);
         users.push({email, password: hashedPassword, loggedIn: false});
