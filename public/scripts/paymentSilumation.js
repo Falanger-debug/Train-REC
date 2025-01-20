@@ -16,6 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
     let paymentSuccessful = false;
     let countdownTimer;
 
+    function getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            class: urlParams.get('class'),
+            discount: urlParams.get('discount'),
+            seat: urlParams.get('seat'),
+            price: urlParams.get('price'),
+            wherefrom: urlParams.get('wherefrom'),
+            whereto: urlParams.get('whereto'),
+            from: urlParams.get('from'),
+            to: urlParams.get('to')
+        };
+    }
+
+    const ticketDetails = getUrlParams();
+
     blikMethod.addEventListener('click', function () {
         blikForm.style.display = 'block';
         walletForm.style.display = 'none';
@@ -40,23 +56,22 @@ document.addEventListener('DOMContentLoaded', function () {
         paymentModal.show();
     });
 
-    confirmWalletPayment.addEventListener('click', function() {
-        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);  // Pobieramy cenę biletu
+    confirmWalletPayment.addEventListener('click', function () {
+        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
 
         if (walletBalance >= paymentAmount) {
             fetch('/payment', {
-                method: 'POST',
-                headers: {
+                method: 'POST', headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ amount: paymentAmount })  // Przesyłamy kwotę płatności
+                }, body: JSON.stringify({amount: paymentAmount, ticket: ticketDetails})
             })
-                .then(response => response.json())  // Oczekujemy odpowiedzi w formacie JSON
+                .then(response => response.json())
                 .then(data => {
+                    console.log('amount:', paymentAmount, 'ticket', ticketDetails, 'data:', data);
                     if (data.success) {
-                        // Jeśli płatność zakończona pomyślnie, aktualizujemy saldo na UI
-                        walletBalanceElement.textContent = data.wallet;  // Zaktualizowane saldo portfela
+                        walletBalanceElement.textContent = data.wallet;
                         paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;
+                        paymentSuccessful = true;
                         startRedirectCountdown();
                     } else {
                         paymentModalMessage.innerHTML = `<span class="text-danger">${data.message}</span>`;
@@ -76,43 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
             paymentModal.show();
         }
     });
-    confirmWalletPayment.addEventListener('click', function() {
-        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);  // Pobieramy cenę biletu
-
-        if (walletBalance >= paymentAmount) {
-            fetch('/payment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ amount: paymentAmount })  // Przesyłamy kwotę płatności
-            })
-                .then(response => response.json())  // Oczekujemy odpowiedzi w formacie JSON
-                .then(data => {
-                    if (data.success) {
-                        // Jeśli płatność zakończona pomyślnie, aktualizujemy saldo na UI
-                        walletBalanceElement.textContent = data.wallet;  // Zaktualizowane saldo portfela
-                        paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;
-                        startRedirectCountdown();
-                    } else {
-                        paymentModalMessage.innerHTML = `<span class="text-danger">${data.message}</span>`;
-                    }
-
-                    closeModalButton.innerText = 'Zamknij';
-                    paymentModal.show();
-                })
-                .catch(_ => {
-                    paymentModalMessage.innerHTML = '<span class="text-danger">Błąd połączenia. Spróbuj ponownie.</span>';
-                    closeModalButton.innerText = 'Zamknij';
-                    paymentModal.show();
-                });
-        } else {
-            paymentModalMessage.innerHTML = '<span class="text-danger">Niewystarczające środki w portfelu.</span>';
-            closeModalButton.innerText = 'Zamknij';
-            paymentModal.show();
-        }
-    });
-
 
 
     paymentModal._element.addEventListener('hidden.bs.modal', function () {
@@ -136,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         countdownTimer = setInterval(() => {
             countdown--;
             if (countdown > 0) {
-                countdownMessage.textContent = `Przekierowanie nastąpi za ${countdown} sekund...`;
+                countdownMessage.textContent = `  Przekierowanie nastąpi za ${countdown} sekund...`;
             } else {
                 clearInterval(countdownTimer);
                 handleCloseRedirect();

@@ -50,12 +50,23 @@ const payIntoWallet = (req, res) => {
 const payOutOfWallet = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     if (isLoggedIn) {
-        const {amount} = req.body;
+        const {amount, from, to, seat, price } = req.body;
         const user = req.session.user || null;
 
         if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
             if (user.wallet >= parseFloat(amount)) {
                 user.wallet -= parseFloat(amount);
+
+                const ticket = {
+                    from,
+                    to,
+                    seat,
+                    price: parseFloat(price),
+                    date: new Date()
+                }
+
+                user.tickets.push(ticket);
+
                 return res.json({
                     success: true,
                     message: 'Płatność z portfela zakończona powodzeniem.',
@@ -82,7 +93,7 @@ const payOutOfWallet = (req, res) => {
 const renderUserProfile = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     if (isLoggedIn) {
-        res.render('userProfile', {user: req.session.user, isLoggedIn});
+        res.render('userProfile', {user: req.session.user, isLoggedIn, tickets: req.session.user.tickets || []});
     } else {
         res.redirect('/login');
     }
