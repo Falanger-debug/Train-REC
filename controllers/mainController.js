@@ -1,11 +1,11 @@
-const users = [
-    { email: 'user@example.com', password: '123', loggedIn: false}
-];
+import bcrypt from 'bcrypt';
+const users = [];
+
 
 const renderMainPage = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(isLoggedIn) {
-        res.render('main', { user: req.session.user, isLoggedIn });
+    if (isLoggedIn) {
+        res.render('main', {user: req.session.user, isLoggedIn});
     } else {
         res.redirect('/login');
     }
@@ -13,8 +13,8 @@ const renderMainPage = (req, res) => {
 
 const renderTrainRoutes = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(isLoggedIn) {
-        res.render('trainRoutes', { user: req.session.user, isLoggedIn });
+    if (isLoggedIn) {
+        res.render('trainRoutes', {user: req.session.user, isLoggedIn});
     } else {
         res.redirect('/login');
     }
@@ -22,8 +22,8 @@ const renderTrainRoutes = (req, res) => {
 
 const renderWallet = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(isLoggedIn) {
-        res.render('wallet', { user: req.session.user, isLoggedIn });
+    if (isLoggedIn) {
+        res.render('wallet', {user: req.session.user, isLoggedIn});
     } else {
         res.redirect('/login');
     }
@@ -31,8 +31,8 @@ const renderWallet = (req, res) => {
 
 const renderUserProfile = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(isLoggedIn) {
-        res.render('userProfile', { user: req.session.user, isLoggedIn });
+    if (isLoggedIn) {
+        res.render('userProfile', {user: req.session.user, isLoggedIn});
     } else {
         res.redirect('/login');
     }
@@ -40,29 +40,31 @@ const renderUserProfile = (req, res) => {
 
 const renderLogin = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(!isLoggedIn) {
-        res.render('login', { user: req.session.user, isLoggedIn });
+    if (!isLoggedIn) {
+        res.render('login', {user: req.session.user, isLoggedIn});
     } else {
         res.redirect('/');
     }
 };
 
-const loginUser = (req, res) => {
-    const { email, password } = req.body;
+const loginUser = async (req, res) => {
+    const {email, password} = req.body;
 
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
+
+    const user = users.find(u => u.email === email);
+
+    if (user && await bcrypt.compare(password, user.password)) {
         user.loggedIn = true;
         req.session.user = user;
         res.redirect('/');
     } else {
-        res.send('Błędne dane logowania');
+        res.status(401).send('Błędne dane logowania');
     }
 }
 
 const logoutUser = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
-    if(isLoggedIn) {
+    if (isLoggedIn) {
         req.session.user.loggedIn = false;
         req.session.destroy(() => {
             res.redirect('/login');
@@ -76,21 +78,22 @@ const logoutUser = (req, res) => {
 const renderRegister = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     const user = req.session.user || null;
-    if(!isLoggedIn) {
-        res.render('register', { user });
+    if (!isLoggedIn) {
+        res.render('register', {user});
     } else {
         res.redirect('/main');
     }
 };
 
-const registerUser = (req, res) => {
-    const { email, password } = req.body;
+const registerUser = async (req, res) => {
+    const {email, password} = req.body;
     const existingUser = users.find(u => u.email === email);
 
-    if(existingUser){
-        res.send('Użytkownik o podanym adresie email już istnieje');
-    } else{
-        users.push({ email, password, loggedIn: false });
+    if (existingUser) {
+        res.status(409).send('Użytkownik o podanym adresie email już istnieje');
+    } else {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        users.push({email, password: hashedPassword, loggedIn: false});
         console.log('Aktualna tablica users:', users);
         res.redirect('/login');
     }
@@ -103,37 +106,28 @@ const searchConnections = (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
-    const { from, to, date, hour } = req.body;
+    const {from, to, date, hour} = req.body;
     const connection = {
-        from,
-        to,
-        date,
-        hour
+        from, to, date, hour
     };
-    res.render('trainRoutes', { connection });
+    res.render('trainRoutes', {connection});
 };
 
 const renderBuyTicket = (req, res) => {
-    const { from, to, duration, connections, price, wherefrom, whereto } = req.query;
+    const {from, to, duration, connections, price, wherefrom, whereto} = req.query;
 
     if (!from || !to || !duration || !price) {
         return res.status(400).send("Missing required query parameters.");
     }
 
     const ticket = {
-        from,
-        to,
-        duration,
-        connections,
-        price,
-        wherefrom,
-        whereto
+        from, to, duration, connections, price, wherefrom, whereto
     }
     res.render('buyTicket', {ticket});
 };
 
 const renderSummary = (req, res) => {
-    const { class: wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice } = req.query;
+    const {class: wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice} = req.query;
     res.render('summary', {
         wherefrom: wherefrom || 'Nie wybrano',
         whereto: whereto || 'Nie wybrano',
@@ -154,7 +148,8 @@ const renderPayForTicket = (req, res) => {
     res.render('payForTicket');
 }
 
-export { renderMainPage,
+export {
+    renderMainPage,
     renderTrainRoutes,
     renderWallet,
     renderUserProfile,
