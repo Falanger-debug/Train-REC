@@ -1,4 +1,7 @@
+console.log('Script loaded');
+
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOMContentLoaded event fired');
     const blikMethod = document.getElementById('blikMethod');
     const walletMethod = document.getElementById('walletMethod');
     const blikForm = document.getElementById('blikForm');
@@ -31,6 +34,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const ticketDetails = getUrlParams();
+    const {price} = getUrlParams();
+
+    const {
+        wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice
+    } = ticketDetails;
+    console.log('wherefrom:', wherefrom, 'whereto:', whereto, 'from:', from, 'to:', to, 'selectedClass:', selectedClass, 'discount:', discount, 'seat:', seat, 'finalPrice:', finalPrice);
+
+    if (price) {
+        const ticketPriceElement = document.getElementById('ticketPrice');
+        ticketPriceElement.textContent = parseFloat(price).toFixed(2) + " zł";
+    }
 
     blikMethod.addEventListener('click', function () {
         blikForm.style.display = 'block';
@@ -58,6 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     confirmWalletPayment.addEventListener('click', function () {
         const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
+
+        const {
+            wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice
+        } = ticketDetails;
+        console.log('wherefrom:', wherefrom, 'whereto:', whereto, 'from:', from, 'to:', to, 'selectedClass:', selectedClass, 'discount:', discount, 'seat:', seat, 'finalPrice:', finalPrice);
 
         if (walletBalance >= paymentAmount) {
             fetch('/payment', {
@@ -127,25 +146,3 @@ document.addEventListener('DOMContentLoaded', function () {
     closeModalButton.addEventListener('click', handleCloseRedirect);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    function getUrlParams() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return {
-            class: urlParams.get('class'),
-            discount: urlParams.get('discount'),
-            seat: urlParams.get('seat'),
-            price: urlParams.get('price'),
-            wherefrom: urlParams.get('wherefrom'),
-            whereto: urlParams.get('whereto'),
-            from: urlParams.get('from'),
-            to: urlParams.get('to')
-        };
-    }
-
-    const {price} = getUrlParams();
-
-    if (price) {
-        const ticketPriceElement = document.getElementById('ticketPrice');
-        ticketPriceElement.textContent = parseFloat(price).toFixed(2) + " zł";
-    }
-});

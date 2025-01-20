@@ -47,24 +47,23 @@ const payIntoWallet = (req, res) => {
     }
 };
 
-const payOutOfWallet = (req, res) => {
+const payOutOfWallet = async (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    console.log('jestem w payOutOfWallet');
     if (isLoggedIn) {
-        const {amount, from, to, seat, price } = req.body;
+        const {amount, from, to, seat, price} = req.body;
         const user = req.session.user || null;
 
+        console.log('Amount:', amount, 'From:', from, 'To:', to, 'Seat:', seat, 'Price:', price);
         if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
             if (user.wallet >= parseFloat(amount)) {
                 user.wallet -= parseFloat(amount);
 
                 const ticket = {
-                    from,
-                    to,
-                    seat,
-                    price: parseFloat(price),
-                    date: new Date()
+                    from, to, seat, price: parseFloat(price), date: new Date()
                 }
 
+                console.log('Ticket:', ticket);
                 user.tickets.push(ticket);
 
                 return res.json({
@@ -87,12 +86,12 @@ const payOutOfWallet = (req, res) => {
             success: false, message: 'Użytkownik nie jest zalogowany.', wallet: 0
         });
     }
-
 }
 
 const renderUserProfile = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     if (isLoggedIn) {
+        console.log('user tickets: ', req.session.user.tickets);
         res.render('userProfile', {user: req.session.user, isLoggedIn, tickets: req.session.user.tickets || []});
     } else {
         res.redirect('/login');
@@ -110,8 +109,6 @@ const renderLogin = (req, res) => {
 
 const loginUser = async (req, res) => {
     const {email, password} = req.body;
-
-
     const user = users.find(u => u.email === email);
 
     if (user && await bcrypt.compare(password, user.password)) {
@@ -143,7 +140,7 @@ const renderRegister = (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
     const user = req.session.user || null;
     if (!isLoggedIn) {
-        res.render('register', {user, errorMessage: null});
+        res.render('register', {user, tickets: [], errorMessage: null});
     } else {
         res.redirect('/main');
     }
@@ -154,10 +151,12 @@ const registerUser = async (req, res) => {
     const existingUser = users.find(u => u.email === email);
 
     if (existingUser) {
-        res.status(409).render('register', {errorMessage: 'Użytkownik o podanym adresie email już istnieje', email});
+        res.status(409).render('register', {
+            errorMessage: 'Użytkownik o podanym adresie email już istnieje', email
+        });
     } else {
         const hashedPassword = await bcrypt.hash(password, 10);
-        users.push({email, password: hashedPassword, loggedIn: false, wallet: 0});
+        users.push({email, password: hashedPassword, loggedIn: false, wallet: 0, tickets: []});
         console.log('Aktualna tablica users:', users);
         res.redirect('/login');
     }
