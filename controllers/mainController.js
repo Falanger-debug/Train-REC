@@ -74,8 +74,10 @@ const logoutUser = (req, res) => {
 }
 
 const renderRegister = (req, res) => {
-    if(!req.session.user || !req.session.user.loggedIn) {
-        res.render('register', { user: req.session.user });
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+    const user = req.session.user || null;
+    if(!isLoggedIn) {
+        res.render('register', { user });
     } else {
         res.redirect('/main');
     }
@@ -83,8 +85,15 @@ const renderRegister = (req, res) => {
 
 const registerUser = (req, res) => {
     const { email, password } = req.body;
-    users.push({ email, password });
-    res.redirect('/login');
+    const existingUser = users.find(u => u.email === email);
+
+    if(existingUser){
+        res.send('Użytkownik o podanym adresie email już istnieje');
+    } else{
+        users.push({ email, password, loggedIn: false });
+        console.log('Aktualna tablica users:', users);
+        res.redirect('/login');
+    }
 }
 
 const renderModals = (req, res) => {

@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 import mainRoutes from './routes/mainRoutes.js';
 import bodyParser from 'body-parser';
 import session from "express-session";
+import fs from 'fs';
 
 const app = express();
 
