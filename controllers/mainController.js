@@ -71,12 +71,11 @@ const payOutOfWallet = async (req, res) => {
     let ticketPrice = parseFloat(price);
     const user = req.session.user || null;
 
-    console.log('wherefrom', wherefrom, 'whereto', whereto, 'from', from, 'to', to, 'seat', seat, 'classType', classType,
-        'price', ticketPrice, 'discount', discount);
+    console.log('wherefrom', wherefrom, 'whereto', whereto, 'from', from, 'to', to, 'seat', seat, 'classType', classType, 'price', ticketPrice, 'discount', discount);
 
     if (ticketPrice && !isNaN(ticketPrice) && ticketPrice > 0) {
-        if (user.wallet >= parseFloat(ticketPrice)) {
-            user.wallet -= parseFloat(ticketPrice);
+        if (user.wallet >= ticketPrice) {
+            user.wallet -= ticketPrice;
 
             const ticket = {
                 wherefrom, whereto, from, to, seat, classType, ticketPrice, discount
@@ -86,9 +85,7 @@ const payOutOfWallet = async (req, res) => {
             user.tickets.push(ticket);
 
             return res.json({
-                success: true,
-                message: 'Płatność z portfela zakończona powodzeniem.',
-                wallet: user.wallet.toFixed(2)
+                success: true, message: 'Płatność z portfela zakończona powodzeniem.', wallet: user.wallet.toFixed(2)
             });
         } else {
             return res.json({
@@ -255,6 +252,36 @@ const renderPayForTicket = (req, res) => {
     }
 }
 
+const returnTicket = (req, res) => {
+    const isLoggedIn = req.session.user && req.session.user.loggedIn;
+
+    if (!isLoggedIn) {
+        return res.redirect('/login');
+    }
+
+    const {index} = req.query;
+
+    if (!index) {
+        return res.redirect('/userProfile');
+    }
+
+    const ticketIndex = parseInt(index);
+    const user = req.session.user;
+
+    if (ticketIndex < 0 || ticketIndex >= user.tickets.length) {
+        return res.redirect('/userProfile');
+    }
+
+    const ticket = user.tickets[ticketIndex];
+    user.wallet += ticket.ticketPrice;
+    user.tickets.splice(ticketIndex, 1);
+
+    return res.json({
+        success: true, message: 'Bilet został zwrócony.'
+    });
+}
+
+
 export {
     renderMainPage,
     renderTrainRoutes,
@@ -272,5 +299,6 @@ export {
     renderBuyTicket,
     renderSummary,
     renderSeatChoicePanel,
-    renderPayForTicket
+    renderPayForTicket,
+    returnTicket
 };

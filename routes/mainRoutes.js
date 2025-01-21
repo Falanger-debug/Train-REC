@@ -16,7 +16,8 @@ import {
     renderBuyTicket,
     renderSummary,
     renderSeatChoicePanel,
-    renderPayForTicket
+    renderPayForTicket,
+    returnTicket
 }
     from "../controllers/mainController.js";
 
@@ -38,6 +39,7 @@ router.get('/buyTicket', renderBuyTicket);
 router.get('/summary', renderSummary);
 router.get('/seatChoice', renderSeatChoicePanel);
 router.get('/payment', renderPayForTicket);
-router.post('/payment', payOutOfWallet);
+router.post('/payment', payOutOfWallet)
+router.get('/returnTicket', returnTicket);
 
 export default router;

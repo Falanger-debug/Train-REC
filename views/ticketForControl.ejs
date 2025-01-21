@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twój Bilet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="/mainStyles.css">
+    <link rel="stylesheet" href="/headerStyles.css">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="mb-0">Twój Bilet</h2>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <h4 class="text-uppercase fw-bold">Szczegóły Biletu</h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Trasa:</strong> <%= ticket.wherefrom %> - <%= ticket.whereto %>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Kiedy:</strong> <%= ticket.from %> - <%= ticket.to %>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Siedzenie:</strong> <%= ticket.seat %>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Klasa:</strong> <%= ticket.classType %>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Ulga:</strong> <%= ticket.discount %>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Cena:</strong> <%= ticket.ticketPrice %> zł
+                        </li>
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <h5 class="fw-bold">Kod QR</h5>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://example.com&size=200x200"
+                             alt="QR Code" class="img-fluid">
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Drukuj Bilet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
