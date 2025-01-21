@@ -70,35 +70,44 @@ const payOutOfWallet = async (req, res) => {
     const {wherefrom, whereto, from, to, seat, classType, price, discount} = ticket;
     let ticketPrice = parseFloat(price);
     const user = req.session.user || null;
+    const isByWallet = req.body.hasOwnProperty('isByWallet') ? req.body.isByWallet : true;
 
     console.log('wherefrom', wherefrom, 'whereto', whereto, 'from', from, 'to', to, 'seat', seat, 'classType', classType, 'price', ticketPrice, 'discount', discount);
 
     if (ticketPrice && !isNaN(ticketPrice) && ticketPrice > 0) {
-        if (user.wallet >= ticketPrice) {
-            user.wallet -= ticketPrice;
+        const ticket = {
+            wherefrom, whereto, from, to, seat, classType, ticketPrice, discount
+        }
+        console.log('Ticket:', ticket);
 
-            const ticket = {
-                wherefrom, whereto, from, to, seat, classType, ticketPrice, discount
-            }
-
-            console.log('Ticket:', ticket);
+        if (!isByWallet) {
             user.tickets.push(ticket);
 
             return res.json({
-                success: true, message: 'Płatność z portfela zakończona powodzeniem.', wallet: user.wallet.toFixed(2)
+                success: true, message: 'Płatność BLIK zakończona powodzeniem.', wallet: user.wallet.toFixed(2)
             });
         } else {
-            return res.json({
-                success: false, message: 'Niewystarczające środki w portfelu.', wallet: user.wallet.toFixed(2)
-            });
+            if (user.wallet >= ticketPrice) {
+                user.wallet -= ticketPrice;
+
+                user.tickets.push(ticket);
+
+                return res.json({
+                    success: true,
+                    message: 'Płatność z portfela zakończona powodzeniem.',
+                    wallet: user.wallet.toFixed(2)
+                });
+            } else {
+                return res.json({
+                    success: false, message: 'Niewystarczające środki w portfelu.', wallet: user.wallet.toFixed(2)
+                });
+            }
         }
     } else {
         return res.json({
             success: false, message: 'Nieprawidłowa kwota.', wallet: user.wallet.toFixed(2)
         });
     }
-
-
 }
 
 const renderUserProfile = (req, res) => {

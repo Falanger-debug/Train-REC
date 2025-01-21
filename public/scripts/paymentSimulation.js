@@ -65,11 +65,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     confirmBlikPayment.addEventListener('click', function () {
+        console.log('jestem w confirmBlikPayment');
         const code = blikCode.value.trim();
         if (code.length === 6 && !isNaN(code)) {
-            paymentSuccessful = true;
-            paymentModalMessage.innerHTML = '<span class="text-success">Płatność BLIK zakończona pomyślnie.</span>';
-            startRedirectCountdown();
+
+            fetch('/payment', {
+                method: 'POST', headers: {
+                    'Content-Type': 'application/json',
+                }, body: JSON.stringify({isByWallet: false, ticket: ticketDetails})
+            }).then(response => response.json())
+                .then(data => {
+                    console.log('ticket', ticketDetails, 'data:', data);
+                    if (data.success) {
+                        paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;
+                        paymentSuccessful = true;
+                        startRedirectCountdown();
+                    } else {
+                        paymentModalMessage.innerHTML = `<span class="text-danger">${data.message}</span>`;
+                    }
+
+                    closeModalButton.innerText = 'Zamknij';
+                    paymentModal.show();
+                }).catch(_ => {
+                paymentModalMessage.innerHTML = '<span class="text-danger">Błąd połączenia. Spróbuj ponownie.</span>';
+                closeModalButton.innerText = 'Zamknij';
+                paymentModal.show();
+            });
         } else {
             paymentSuccessful = false;
             paymentModalMessage.innerHTML = '<span class="text-danger">Nieprawidłowy kod BLIK. Spróbuj ponownie.</span>';
@@ -85,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('/payment', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json',
-                }, body: JSON.stringify({ticket: ticketDetails})
+                }, body: JSON.stringify({isByWallet: true, ticket: ticketDetails})
             })
                 .then(response => response.json())
                 .then(data => {
