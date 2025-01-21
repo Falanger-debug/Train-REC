@@ -48,6 +48,9 @@
                                    name="password" placeholder="Hasło" required>
                             <label for="floatingPassword">Hasło</label>
                         </div>
+                        <% if (errorMessage) { %>
+                            <div class="alert alert-danger mt-3"><%= errorMessage %></div>
+                        <% } %>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-search" id="loginButton" type="submit">
                             Zaloguj
                         </button>

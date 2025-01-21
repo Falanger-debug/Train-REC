@@ -1,3 +1,7 @@
 #loginButton {
     color: white;
 }
+
+.errorMessage {
+    color: red;
+}

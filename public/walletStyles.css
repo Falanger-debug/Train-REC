@@ -1,0 +1,63 @@
+body {
+    background-color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+.wallet-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.wallet-header h1 {
+    color: var(--blue-color);
+}
+
+.wallet-balance {
+    background-color: var(--blue-color);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.btn-pay {
+    background-color: green;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.btn-pay:hover {
+    background-color: darkgreen;
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-color: var(--ligher-blue-color);
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--blue-color);
+}

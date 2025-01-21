@@ -5,11 +5,14 @@ import mainRoutes from './routes/mainRoutes.js';
 import bodyParser from 'body-parser';
 import session from "express-session";
 
+
 const app = express();
 
 // Middleware dla parsera formularzy
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 // Express session configuration
 app.use(session({
@@ -22,7 +25,7 @@ app.use(session({
 
 // middleware for isLoggedIn for all views
 app.use((req, res, next) => {
-    console.log('Session:', req.session)
+    // console.log('Session:', req.session)
     res.locals.isLoggedIn = req.session.user && req.session.user.loggedIn;
     next();
 });

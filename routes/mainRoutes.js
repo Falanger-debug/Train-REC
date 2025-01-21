@@ -3,6 +3,8 @@ import {
     renderMainPage,
     renderTrainRoutes,
     renderWallet,
+    payIntoWallet,
+    payOutOfWallet,
     renderUserProfile,
     renderLogin,
     loginUser,
@@ -14,7 +16,8 @@ import {
     renderBuyTicket,
     renderSummary,
     renderSeatChoicePanel,
-    renderPayForTicket
+    renderPayForTicket,
+    returnTicket
 }
     from "../controllers/mainController.js";
 
@@ -23,6 +26,7 @@ const router = express.Router();
 router.get('/', renderMainPage);
 router.get('/trainRoutes', renderTrainRoutes);
 router.get('/wallet', renderWallet);
+router.post('/wallet', payIntoWallet);
 router.get('/userProfile', renderUserProfile);
 router.get('/login', renderLogin);
 router.post('/login', loginUser);
@@ -35,6 +39,7 @@ router.get('/buyTicket', renderBuyTicket);
 router.get('/summary', renderSummary);
 router.get('/seatChoice', renderSeatChoicePanel);
 router.get('/payment', renderPayForTicket);
-
+router.post('/payment', payOutOfWallet)
+router.get('/returnTicket', returnTicket);
 
 export default router;
