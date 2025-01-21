@@ -1,7 +1,4 @@
-console.log('Script loaded');
-
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOMContentLoaded event fired');
     const blikMethod = document.getElementById('blikMethod');
     const walletMethod = document.getElementById('walletMethod');
     const blikForm = document.getElementById('blikForm');
@@ -14,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const paymentModalMessage = document.getElementById('paymentModalMessage');
     const closeModalButton = document.getElementById('closeModalButton');
     const countdownMessage = document.getElementById('countdownMessage');
+    const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
 
     let walletBalance = parseFloat(walletBalanceElement.textContent);
     let paymentSuccessful = false;
@@ -22,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getUrlParams() {
         const urlParams = new URLSearchParams(window.location.search);
         return {
-            class: urlParams.get('class'),
+            classType: urlParams.get('class'),
             discount: urlParams.get('discount'),
             seat: urlParams.get('seat'),
             price: urlParams.get('price'),
@@ -33,13 +31,23 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    const ticketDetails = getUrlParams();
     const {price} = getUrlParams();
 
     const {
-        wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice
-    } = ticketDetails;
-    console.log('wherefrom:', wherefrom, 'whereto:', whereto, 'from:', from, 'to:', to, 'selectedClass:', selectedClass, 'discount:', discount, 'seat:', seat, 'finalPrice:', finalPrice);
+        wherefrom, whereto, from, to, seat, discount, classType
+    } = getUrlParams();
+
+    let ticketDetails = {
+        wherefrom: wherefrom || 'Nie wybrano',
+        whereto: whereto || 'Nie wybrano',
+        from: from || 'Nie wybrano',
+        to: to || 'Nie wybrano',
+        seat: seat || 'Nie wybrano',
+        classType: classType || 'Nie wybrano',
+        price: paymentAmount || 'Nie wybrano',
+        discount: discount || 'Nie wybrano'
+    }
+    console.log('ticketDetails:', ticketDetails);
 
     if (price) {
         const ticketPriceElement = document.getElementById('ticketPrice');
@@ -71,22 +79,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     confirmWalletPayment.addEventListener('click', function () {
-        const paymentAmount = parseFloat(document.getElementById('ticketPrice').textContent);
-
-        const {
-            wherefrom, whereto, from, to, selectedClass, discount, seat, finalPrice
-        } = ticketDetails;
-        console.log('wherefrom:', wherefrom, 'whereto:', whereto, 'from:', from, 'to:', to, 'selectedClass:', selectedClass, 'discount:', discount, 'seat:', seat, 'finalPrice:', finalPrice);
+        console.log('jestem w confirmWalletPayment');
 
         if (walletBalance >= paymentAmount) {
             fetch('/payment', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json',
-                }, body: JSON.stringify({amount: paymentAmount, ticket: ticketDetails})
+                }, body: JSON.stringify({ticket: ticketDetails})
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('amount:', paymentAmount, 'ticket', ticketDetails, 'data:', data);
+                    console.log('ticket', ticketDetails, 'data:', data);
                     if (data.success) {
                         walletBalanceElement.textContent = data.wallet;
                         paymentModalMessage.innerHTML = `<span class="text-success">${data.message}</span>`;

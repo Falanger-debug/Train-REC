@@ -11,6 +11,8 @@ const app = express();
 // Middleware dla parsera formularzy
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 // Express session configuration
 app.use(session({

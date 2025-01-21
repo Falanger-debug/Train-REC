@@ -25,9 +25,10 @@
                 <ul>
                     <% tickets.forEach(ticket => { %>
                         <li>
-                            <strong>Trasa:</strong> <%= ticket.from %> - <%= ticket.to %><br>
+                            <strong>Trasa:</strong> <%= ticket.wherefrom %> - <%= ticket.whereto %><br>
+                            <stron>Kiedy:</stron> <%= ticket.from %> - <%= ticket.to%><br>
                             <strong>Siedzenie:</strong> <%= ticket.seat %><br>
-                            <strong>Cena:</strong> <%= ticket.price %> zł<br>
+                            <strong>Cena:</strong> <%= ticket.ticketPrice %> zł<br>
 <!--                            <strong>Data zakupu:</strong> = ticket.date.toLocaleDateString()-->
                         </li>
                     <% }); %>
