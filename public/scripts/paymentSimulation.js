@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         to: to || 'Nie wybrano',
         seat: seat || 'Nie wybrano',
         classType: classType || 'Nie wybrano',
-        price: paymentAmount || 'Nie wybrano',
+        price: price || 'Nie wybrano',
         discount: discount || 'Nie wybrano'
     }
     console.log('ticketDetails:', ticketDetails);

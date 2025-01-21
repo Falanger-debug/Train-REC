@@ -49,55 +49,59 @@ const payIntoWallet = (req, res) => {
 
 const payOutOfWallet = async (req, res) => {
     const isLoggedIn = req.session.user && req.session.user.loggedIn;
+
     console.log('jestem w payOutOfWallet');
     console.log('req.body:', req.body);
-    if (isLoggedIn) {
-        const ticket = req.body.ticket;
-        if (ticket) {
-            const { wherefrom, whereto, from, to, seat, classType, ticketPrice, discount } = ticket;
 
-            console.log('wherefrom', wherefrom, 'whereto', whereto, 'from', from, 'to', to, 'seat', seat, 'classType',
-                classType, 'price', ticketPrice, 'discount', discount);
-
-            const user = req.session.user || null;
-
-            if (ticketPrice && !isNaN(ticketPrice) && ticketPrice > 0) {
-                if (user.wallet >= parseFloat(ticketPrice)) {
-                    user.wallet -= parseFloat(ticketPrice);
-
-                    const ticket = {
-                        wherefrom, whereto, from, to, seat, classType, ticketPrice: parseFloat(ticketPrice), discount
-                    }
-
-                    console.log('Ticket:', ticket);
-                    user.tickets.push(ticket);
-
-                    return res.json({
-                        success: true,
-                        message: 'Płatność z portfela zakończona powodzeniem.',
-                        wallet: user.wallet.toFixed(2)
-                    });
-                } else {
-                    return res.json({
-                        success: false, message: 'Niewystarczające środki w portfelu.', wallet: user.wallet.toFixed(2)
-                    });
-                }
-            } else {
-                return res.json({
-                    success: false, message: 'Nieprawidłowa kwota.', wallet: user.wallet.toFixed(2)
-                });
-            }
-        } else {
-            return res.json({
-                success: false,
-                message: 'Brak danych o bilecie.',
-            });
-        }
-    } else {
+    if (!isLoggedIn) {
         return res.json({
             success: false, message: 'Użytkownik nie jest zalogowany.', wallet: 0
         });
     }
+
+    const ticket = req.body.ticket;
+
+    if (!ticket) {
+        return res.json({
+            success: false, message: 'Brak danych o bilecie.',
+        });
+    }
+
+    const {wherefrom, whereto, from, to, seat, classType, price, discount} = ticket;
+    let ticketPrice = parseFloat(price);
+    const user = req.session.user || null;
+
+    console.log('wherefrom', wherefrom, 'whereto', whereto, 'from', from, 'to', to, 'seat', seat, 'classType', classType,
+        'price', ticketPrice, 'discount', discount);
+
+    if (ticketPrice && !isNaN(ticketPrice) && ticketPrice > 0) {
+        if (user.wallet >= parseFloat(ticketPrice)) {
+            user.wallet -= parseFloat(ticketPrice);
+
+            const ticket = {
+                wherefrom, whereto, from, to, seat, classType, ticketPrice, discount
+            }
+
+            console.log('Ticket:', ticket);
+            user.tickets.push(ticket);
+
+            return res.json({
+                success: true,
+                message: 'Płatność z portfela zakończona powodzeniem.',
+                wallet: user.wallet.toFixed(2)
+            });
+        } else {
+            return res.json({
+                success: false, message: 'Niewystarczające środki w portfelu.', wallet: user.wallet.toFixed(2)
+            });
+        }
+    } else {
+        return res.json({
+            success: false, message: 'Nieprawidłowa kwota.', wallet: user.wallet.toFixed(2)
+        });
+    }
+
+
 }
 
 const renderUserProfile = (req, res) => {
