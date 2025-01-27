@@ -82,12 +82,11 @@
         <div class="container my-4" id="seatChooser">
             <label for="seat" class="form-label">Wybierz miejsce</label>
             <select id="seat" class="form-select form-select-lg" onchange="handleSeatSelection()">
-                <option value="dowolny" selected>Dowolne miejsce</option>
-                <option value="schemat">Wybierz ze schematu</option>
-                <option value="bezprzedzialowy">Wagon bezprzedziałowy</option>
-                <option value="przedzialy">Wagon z przedziałami</option>
-                <option value="wozek">Miejsce dla osoby na wózku</option>
-                <option value="rower">Miejsce dla podróżującego z rowerem</option>
+                <option value="Wagon: 15, Miejsce: 1, Bez przedzialu" selected>Dowolne miejsce</option>
+                <option value="Wagon: 1, Miejsce: 12, Bez przedzialu">Wagon bezprzedziałowy</option>
+                <option value="Wagon: 2, Miejsce: 3, Z Przedzialami">Wagon z przedziałami</option>
+                <option value="Wagon: 1, Miejsce: 1, Wozek">Miejsce dla osoby na wózku</option>
+                <option value="Wagon: 15, Miejsce: 3, Rower">Miejsce dla podróżującego z rowerem</option>
                 <option value="wybrane">Wpisz numer ręcznie</option>
             </select>
         </div>
@@ -103,9 +102,9 @@
             Klasa 2
         </button>
         <button type="button" class="btn btn-custom bg-white btn-lg" id="class1Btn" data-toggle="button">
-            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
+<!--            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>-->
             Klasa 1
-            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>
+<!--            <i class="fa-solid fa-crown" style="color: #FFD43B;"></i>-->
         </button>
     </div>
 
