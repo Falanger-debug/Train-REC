@@ -25,14 +25,14 @@
    git clone https://github.com/Falanger-debug/Train-REC.git
    cd Train-REC
    ```
-3. Create .env file in Train-REC folder:  
+2. Create .env file in Train-REC folder:  
    Inside the Train-REC folder, create an empty .env file. You don’t need to add anything to it, this is just to prevent errors during runtime.
-4. Install dependencies:  
+3. Install dependencies:  
    Install all the required packages by running:
    ```
    npm install
    ```
-6. Run the application:  
+4. Run the application:  
    Start the application using the following command:
    ```
    npm run dev
